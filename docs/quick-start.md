@@ -3,7 +3,7 @@
 ## What Is This?
 
 This is a complete Claude Code agent architecture for game development. It
-organizes 49 specialized AI agents into a studio hierarchy that mirrors
+organizes 50+ specialized AI agents into a studio hierarchy that mirrors
 real game development teams, with defined responsibilities, delegation
 rules, and coordination protocols. It includes engine-specialist agents
 for Godot, Unity, and Unreal — each with dedicated sub-specialists for
@@ -152,7 +152,7 @@ Ask yourself: "What department would handle this in a real studio?"
 
 ### 4. Use Templates for New Documents
 
-Templates are in `.zcode/docs/templates/`:
+Templates are in `${CLAUDE_PLUGIN_ROOT}/docs/templates/`:
 
 - `game-design-document.md` -- for new mechanics and systems
 - `architecture-decision-record.md` -- for technical decisions
@@ -189,7 +189,7 @@ Templates are in `.zcode/docs/templates/`:
 - `difficulty-curve.md` -- for difficulty axes, onboarding ramp, and cross-system interactions
 - `test-evidence.md` -- template for recording manual test evidence (screenshots, walkthrough notes)
 
-Also in `.zcode/docs/templates/collaborative-protocols/` (used by agents, not typically edited directly):
+Also in `${CLAUDE_PLUGIN_ROOT}/docs/templates/collaborative-protocols/` (used by agents, not typically edited directly):
 
 - `design-agent-protocol.md` -- question-options-draft-approval cycle for design agents
 - `implementation-agent-protocol.md` -- story pickup through /story-done cycle for programming agents
@@ -271,21 +271,27 @@ If you have design docs, prototypes, or code already:
 
 ```
 AGENTS.md                          -- Master config (read this first, ~60 lines)
-.zcode/
-  settings.json                    -- Claude Code hooks and project settings
-  agents/                          -- 49 agent definitions (YAML frontmatter)
-  skills/                          -- 73 slash command definitions (YAML frontmatter)
-  hooks/                           -- 12 hook scripts (.sh) wired by settings.json
-  rules/                           -- 11 path-specific rule files
+.zcode/                            -- Project-local config only
+  settings.json                    -- Host status-line/permission settings
   docs/
-    quick-start.md                 -- This file
     technical-preferences.md       -- Project-specific standards (populated by /setup-engine)
-    coding-standards.md            -- Coding and design doc standards
-    coordination-rules.md          -- Agent coordination rules
-    context-management.md          -- Context budgets and compaction instructions
-    directory-structure.md         -- Project directory layout
-    workflow-catalog.yaml          -- 7-phase pipeline definition (read by /help)
-    setup-requirements.md          -- System prerequisites (Git Bash, jq, Python)
-    settings-local-template.md     -- Personal settings.local.json guide
-    templates/                     -- 41 document templates
+
+Framework content below is served from the game-studios plugin install
+directory (${CLAUDE_PLUGIN_ROOT}), not stored in the workspace:
+
+agents/                            -- 50+ agent definitions
+skills/                            -- 70+ workflow skills (slash commands)
+hooks/                             -- Guard/audit hook scripts (wired by hooks/hooks.json)
+rules/                             -- 11 path-specific rule files
+docs/
+  quick-start.md                   -- This file
+  coding-standards.md              -- Coding and design doc standards
+  coordination-rules.md            -- Agent coordination rules
+  context-management.md            -- Context budgets and compaction instructions
+  directory-structure.md           -- Project directory layout
+  workflow-catalog.yaml            -- 7-phase pipeline definition (read by /help)
+  setup-requirements.md            -- System prerequisites (Git Bash, jq, Python)
+  settings-local-template.md       -- Personal settings.local.json guide
+  templates/                       -- 40+ document templates
+  engine-reference/                -- Godot / Unity / Unreal curated references
 ```

@@ -56,7 +56,7 @@ If the player journey file does not exist, note the gap and proceed:
 > journey session after this spec is drafted."
 
 Also add to the UX spec's Open Questions section:
-> "Player journey map not yet created. Template available at `.zcode/docs/templates/player-journey.md`. Run `/ux-design` Phase 2b or create it manually to establish player context for this screen."
+> "Player journey map not yet created. Template available at `${CLAUDE_PLUGIN_ROOT}/docs/templates/player-journey.md`. Run `/ux-design` Phase 2b or create it manually to establish player context for this screen."
 
 ### 2c: GDD UI Requirements
 

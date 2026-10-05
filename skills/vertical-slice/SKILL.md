@@ -41,7 +41,7 @@ Resolve the review mode:
 2. Else read `production/review-mode.txt` → use that value
 3. Else → default to `lean`
 
-See `.zcode/docs/director-gates.md` for the full check pattern.
+See `${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md` for the full check pattern.
 
 Read the following files to understand the full design intent:
 - `AGENTS.md` — tech stack and engine
@@ -223,7 +223,7 @@ Track velocity throughout the build. Log:
 This is the most honest data you will ever have about your production rate. Do not
 skip it. It feeds directly into sprint planning.
 
-Read `.zcode/docs/templates/vertical-slice-report.md` to get the report structure.
+Read `${CLAUDE_PLUGIN_ROOT}/docs/templates/vertical-slice-report.md` to get the report structure.
 If the template file is not found, use this fallback structure:
 - `## Vertical Slice Report — [Game Title] — [Date]`
 - `### Executive Summary` (PROCEED / PIVOT / STOP verdict + 2-sentence rationale)
@@ -261,7 +261,7 @@ the project — cross-reference it with sprint estimates.
 - `solo` → skip. Note: "CD-PLAYTEST skipped — Solo mode."
 - `lean` → skip (not a PHASE-GATE). Note: "CD-PLAYTEST skipped — Lean mode."
 - `full` → spawn `creative-director` via Task using gate **CD-PLAYTEST**
-  (`.zcode/docs/director-gates.md`).
+  (`${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md`).
 
 Pass: the full REPORT.md content, the validation question, game pillars and core
 fantasy from `design/gdd/game-concept.md`.

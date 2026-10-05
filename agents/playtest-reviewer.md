@@ -90,7 +90,7 @@ Part A — design & implementation (static; read the GDDs and the source)
 |-----------|---|---|---|----|
 | 完整度 | GDD-promised systems mostly absent | core present, several GDD features missing | all MVP systems in place, minor gaps | full tier implemented per GDD |
 | 新颖性 | cliché clone, no identity | competent but familiar | clear original turn on a known genre | genuinely novel core loop |
-| 架构与可维护性 | spaghetti, no structure | follows basic conventions, some smells | clean, follows `.zcode/rules` | exemplary, easy to extend |
+| 架构与可维护性 | spaghetti, no structure | follows basic conventions, some smells | clean, follows `${CLAUDE_PLUGIN_ROOT}/rules` | exemplary, easy to extend |
 
 Part B — the artifact (dynamic; scored **only** from your own run, and capped by
 its completeness — a claim without a backing frame or log scores as unproven, no

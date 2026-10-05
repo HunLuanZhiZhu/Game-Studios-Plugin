@@ -85,6 +85,6 @@ past the sprint review.
 
 ---
 
-*Template: `.zcode/docs/templates/test-evidence.md`*
+*Template: `${CLAUDE_PLUGIN_ROOT}/docs/templates/test-evidence.md`*
 *Used for: Visual/Feel and UI story type evidence records*
 *Location: `production/qa/evidence/[story-slug]-evidence.md`*

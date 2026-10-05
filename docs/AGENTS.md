@@ -4,7 +4,7 @@ When authoring or editing files in this directory, follow these standards.
 
 ## Architecture Decision Records (`docs/architecture/`)
 
-Use the ADR template: `.zcode/docs/templates/architecture-decision-record.md`
+Use the ADR template: `${CLAUDE_PLUGIN_ROOT}/docs/templates/architecture-decision-record.md`
 
 **Required sections:** Title, Status, Context, Decision, Consequences,
 ADR Dependencies, Engine Compatibility, GDD Requirements Addressed
@@ -25,9 +25,9 @@ ADR Dependencies, Engine Compatibility, GDD Requirements Addressed
 
 **Validation:** Run `/architecture-review` after completing a set of ADRs.
 
-## Engine Reference (`docs/engine-reference/`)
+## Engine Reference (`${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/`)
 
 Version-pinned engine API snapshots. **Always check here before using any
 engine API** — the LLM's training data predates the pinned engine version.
 
-Current engine: see `docs/engine-reference/godot/VERSION.md`
+Current engine: see `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/VERSION.md`

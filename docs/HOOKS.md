@@ -1,13 +1,14 @@
-# CCGS Studio Hooks — 说明文档
+# Hooks — 自动化守卫与上下文注入(说明文档)
 
-本插件把 Claude Code Game Studios 的自动化 hook 集打包成一个 Claude Code 兼容插件，
-可在 ZCode（运行受支持的子集）与 Claude Code 插件市场（完整声明）中工作。
+Game Studios 插件的 `hooks/` 目录携带 Claude Code Game Studios 的全部自动化
+hook,随单个 `game-studios` 插件分发,可在 ZCode(运行受支持的子集)与
+Claude Code(完整声明)中工作。
 
-> 配套清单：
-> - `.claude-plugin/plugin.json` — 插件清单
+> 配套清单:
+> - `.claude-plugin/plugin.json` — 主插件清单(插件名 `game-studios`)
 > - `hooks/hooks.json` — 全部 hook 的事件绑定
-> - `hooks/*.sh` — 15 个脚本（2 个守卫包装器 + 13 个实际 hook 逻辑）
-> - 仓库根 `.claude-plugin/marketplace.json` — 插件市场登记
+> - `hooks/*.sh` — 15 个脚本(2 个守卫包装器 + 13 个实际 hook 逻辑)
+> - `.claude-plugin/marketplace.json` — 自分发市场登记(source 指向仓库根)
 
 ---
 
@@ -105,7 +106,7 @@
 - 见 §2 脚注与 §5：PostToolUse 的退出码在多数宿主下不真正阻止写入。
 
 ### 3.9 `validate-skill-change.sh`（事件 PostToolUse，matcher `Write|Edit`）
-仅当写入/编辑 `.zcode/skills/` 下文件时，提醒运行 `/skill-test static <skill-name>` 做结构合规校验。纯提醒，非阻断。
+仅当写入/编辑 `${CLAUDE_PLUGIN_ROOT}/skills/` 下文件时，提醒运行 `/skill-test static <skill-name>` 做结构合规校验。纯提醒，非阻断。
 
 ### 3.10 `log-agent-stop.sh`（事件 PostToolUse，matcher `Agent|Task`）
 与 3.7 对应，记录 agent 完成：`时间戳 | Agent completed: <name>` 追加到同一 `agent-audit.log`。非阻断。
@@ -196,17 +197,15 @@ Claude Code 除此之外还支持（与本插件相关或常见）：`Notificati
 
 ## 7. 安装与验证
 
-**安装（ZCode）**
-1. 在 ZCode 客户端打开 **设置 → 插件管理**。
-2. 添加/安装本插件（`ccgs-studio-hooks`），来源指向本仓库的 `./ccgs-studio-hooks`。
-3. 确保工作区根存在 `.zcode/docs/technical-preferences.md`（CCGS 项目标记），否则所有 hook 空跑。
-
-**安装（Claude Code 市场）**
-- 通过仓库根 `.claude-plugin/marketplace.json` 登记的市场安装插件即可，完整事件集生效。
+**安装(ZCode / Claude Code)**
+1. 将本仓库根添加为插件市场并安装 `game-studios` 插件
+   (市场清单 `.claude-plugin/marketplace.json`,`source` 指向仓库根自身)。
+2. 确保工作区根存在 `.zcode/docs/technical-preferences.md`(Game Studios 项目标记),
+   否则所有 hook 空跑——该文件由 `/game-studios-init` 脚手架创建。
 
 **验证触发**
 - 新建一个 CCGS 工作区，开启会话 → 应看到 `session-start.sh` 注入的上下文与 `detect-gaps.sh` 的缺口提示。
 - 跑一条 `rm -rf` 或 `git push --force` → `validate-dangerous.sh` / `validate-push.sh` 应拦截或提醒。
 - 改一个 `assets/data/*.json` 写成非法 JSON 并提交 → `validate-commit.sh` 应 `exit 2` 阻断。
-- 改 `.zcode/skills/xxx/SKILL.md` → `validate-skill-change.sh` 应提醒跑 `/skill-test`。
+- 改 `${CLAUDE_PLUGIN_ROOT}/skills/xxx/SKILL.md` → `validate-skill-change.sh` 应提醒跑 `/skill-test`。
 - 非 CCGS 目录（无 `technical-preferences.md`）下重复上述操作 → 全部应静默跳过（守卫生效）。

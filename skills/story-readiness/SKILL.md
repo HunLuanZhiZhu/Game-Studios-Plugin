@@ -29,7 +29,7 @@ Resolve the review mode once at startup (store for all gate spawns this run):
 2. Else read `production/review-mode.txt` → use that value
 3. Else → default to `lean`
 
-See `.zcode/docs/director-gates.md` for the full check pattern and mode definitions.
+See `${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md` for the full check pattern and mode definitions.
 
 ---
 
@@ -332,7 +332,7 @@ Apply the review mode resolved in Phase 0 before spawning QL-STORY-READY:
 - `lean` → skip. Note: "QL-STORY-READY skipped — Lean mode." Proceed to close.
 - `full` → spawn as normal.
 
-Spawn `qa-lead` via Task using gate **QL-STORY-READY** (`.zcode/docs/director-gates.md`).
+Spawn `qa-lead` via Task using gate **QL-STORY-READY** (`${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md`).
 
 Pass the following context:
 - Story title

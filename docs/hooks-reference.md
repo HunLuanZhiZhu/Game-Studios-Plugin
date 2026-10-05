@@ -1,6 +1,6 @@
 # Active Hooks
 
-Hooks are registered by the optional `ccgs-studio-hooks` plugin in `ccgs-studio-hooks/hooks/hooks.json` and fire when that plugin is installed and enabled. `.zcode/settings.json` is retained only as a legacy status-line/permission reference and does not register hooks.
+Hooks are registered by this plugin in `hooks/hooks.json` and fire whenever the plugin is installed and enabled. `.zcode/settings.json` is retained only as a legacy status-line/permission reference and does not register hooks.
 
 | Hook | Event | Trigger | Action |
 | ---- | ----- | ------- | ------ |
@@ -15,7 +15,7 @@ Hooks are registered by the optional `ccgs-studio-hooks` plugin in `ccgs-studio-
 | `session-stop.sh` | Stop | Session ends | Summarizes accomplishments and updates session log |
 | `log-agent.sh` | SubagentStart | Agent spawned | Audit trail start — logs subagent invocation with timestamp |
 | `log-agent-stop.sh` | SubagentStop | Agent stops | Audit trail stop — completes subagent record |
-| `validate-skill-change.sh` | PostToolUse (Write/Edit) | Skill file changes | Advises running `/skill-test` after any `.zcode/skills/` file is written or edited |
+| `validate-skill-change.sh` | PostToolUse (Write/Edit) | Skill file changes | Advises running `/skill-test` after any `${CLAUDE_PLUGIN_ROOT}/skills/` file is written or edited |
 
-Hook reference documentation: `.zcode/docs/hooks-reference/`
-Hook input schema documentation: `.zcode/docs/hooks-reference/hook-input-schemas.md`
+Hook reference documentation: `${CLAUDE_PLUGIN_ROOT}/docs/hooks-reference/`
+Hook input schema documentation: `${CLAUDE_PLUGIN_ROOT}/docs/hooks-reference/hook-input-schemas.md`

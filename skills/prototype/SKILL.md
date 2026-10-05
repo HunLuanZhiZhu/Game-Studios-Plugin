@@ -396,7 +396,7 @@ Vague ones make it useless.
 
 ## Phase 7: Generate Prototype Report
 
-Read `.zcode/docs/templates/prototype-report.md` to get the report structure.
+Read `${CLAUDE_PLUGIN_ROOT}/docs/templates/prototype-report.md` to get the report structure.
 Fill in every section based on what was observed during this session. Replace all
 placeholder text with real observations — no generic filler.
 

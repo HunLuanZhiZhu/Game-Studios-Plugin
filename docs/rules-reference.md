@@ -1,6 +1,6 @@
 # Path-Specific Rules
 
-Rules in `.zcode/rules/` are automatically enforced when editing files in matching paths:
+Rules in `${CLAUDE_PLUGIN_ROOT}/rules/` are automatically enforced when editing files in matching paths:
 
 | Rule File | Path Pattern | Enforces |
 | ---- | ---- | ---- |

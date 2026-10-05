@@ -16,7 +16,7 @@ Resolve the review mode (once, store for all gate spawns this run):
 2. Else read `production/review-mode.txt` → use that value
 3. Else → default to `lean`
 
-See `.zcode/docs/director-gates.md` for the full check pattern.
+See `${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md` for the full check pattern.
 
 A system name or retrofit path is **required**. If missing:
 
@@ -162,9 +162,9 @@ Map the system's category (from systems-index.md) to an engine domain:
 
 **Step 2 — Read engine context (if available):**
 - Read `.zcode/docs/technical-preferences.md` to identify the engine and version
-- If engine is configured, read `docs/engine-reference/[engine]/VERSION.md`
-- Read `docs/engine-reference/[engine]/modules/[domain].md` if it exists
-- Read `docs/engine-reference/[engine]/breaking-changes.md` for domain-relevant entries
+- If engine is configured, read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/[engine]/VERSION.md`
+- Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/[engine]/modules/[domain].md` if it exists
+- Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/[engine]/breaking-changes.md` for domain-relevant entries
 - Glob `docs/architecture/adr-*.md` and read any ADRs whose domain matches
   (check the Engine Compatibility table's "Domain" field)
 
@@ -215,7 +215,7 @@ Use `AskUserQuestion`:
 Once the user confirms, **immediately** create the GDD file with empty section
 headers. This ensures incremental writes have a target.
 
-Use the template structure from `.zcode/docs/templates/game-design-document.md`:
+Use the template structure from `${CLAUDE_PLUGIN_ROOT}/docs/templates/game-design-document.md`:
 
 ```markdown
 # [System Name]
@@ -689,7 +689,7 @@ the source of truth). Verify:
 - `lean` → skip (not a PHASE-GATE). Note: "CD-GDD-ALIGN skipped — Lean mode." Proceed to Step 5b.
 - `full` → spawn as normal.
 
-Before finalizing the GDD, spawn `creative-director` via Task using gate **CD-GDD-ALIGN** (`.zcode/docs/director-gates.md`).
+Before finalizing the GDD, spawn `creative-director` via Task using gate **CD-GDD-ALIGN** (`${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md`).
 
 Pass: completed GDD file path, game pillars (from `design/gdd/game-concept.md` or `design/gdd/game-pillars.md`), MDA aesthetics target.
 

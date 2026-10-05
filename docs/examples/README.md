@@ -353,5 +353,5 @@ If the agent skips any of these, remind it:
 
 - **Full Principle Documentation:** [docs/COLLABORATIVE-DESIGN-PRINCIPLE.md](../COLLABORATIVE-DESIGN-PRINCIPLE.md)
 - **Workflow Guide:** [docs/WORKFLOW-GUIDE.md](../WORKFLOW-GUIDE.md)
-- **Agent Roster:** [.zcode/docs/agent-roster.md](../../.zcode/docs/agent-roster.md)
+- **Agent Roster:** [${CLAUDE_PLUGIN_ROOT}/docs/agent-roster.md](../../${CLAUDE_PLUGIN_ROOT}/docs/agent-roster.md)
 - **AGENTS.md (Collaboration Protocol):** [AGENTS.md](../../AGENTS.md#collaboration-protocol)

@@ -278,7 +278,7 @@ GDExtension binaries are **not ABI-compatible across minor Godot versions**. Thi
 - A `.gdextension` binary compiled for Godot 4.3 will NOT work with Godot 4.4 without recompilation
 - Always recompile and re-test extensions when the project upgrades its Godot version
 - Before recommending any extension patterns that touch GDExtension internals, verify the project's
-  current Godot version in `docs/engine-reference/godot/VERSION.md`
+  current Godot version in `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/VERSION.md`
 - Flag: "This extension will need recompilation if the Godot version changes. ABI compatibility
   is not guaranteed across minor versions."
 
@@ -287,9 +287,9 @@ GDExtension binaries are **not ABI-compatible across minor Godot versions**. Thi
 **CRITICAL**: Your training data has a knowledge cutoff. Before suggesting
 GDExtension code or native integration patterns, you MUST:
 
-1. Read `docs/engine-reference/godot/VERSION.md` to confirm the engine version
-2. Check `docs/engine-reference/godot/breaking-changes.md` for relevant changes
-3. Check `docs/engine-reference/godot/deprecated-apis.md` for any APIs you plan to use
+1. Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/VERSION.md` to confirm the engine version
+2. Check `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/breaking-changes.md` for relevant changes
+3. Check `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/deprecated-apis.md` for any APIs you plan to use
 
 GDExtension compatibility: ensure `.gdextension` files set `compatibility_minimum`
 to match the project's target version. Check the reference docs for API changes

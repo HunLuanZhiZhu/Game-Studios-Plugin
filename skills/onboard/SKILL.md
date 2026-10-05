@@ -11,7 +11,7 @@ model: haiku
 
 Read AGENTS.md for project overview and standards.
 
-Read the relevant agent definition from `.zcode/agents/` if a specific role is specified.
+Read the relevant agent definition from `${CLAUDE_PLUGIN_ROOT}/agents/` if a specific role is specified.
 
 ---
 

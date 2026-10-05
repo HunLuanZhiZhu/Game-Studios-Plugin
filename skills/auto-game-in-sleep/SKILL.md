@@ -14,7 +14,7 @@ literal overnight timer; the name is about *unattended* execution.
 
 One invocation of this skill = one complete studio run. You pick up wherever
 the project stands (or start from nothing), drive the full pipeline defined in
-`.zcode/docs/workflow-catalog.yaml`, test the running game yourself, and only
+`${CLAUDE_PLUGIN_ROOT}/docs/workflow-catalog.yaml`, test the running game yourself, and only
 stop when the game is done or further progress is impossible. **There is no one
 to ask — the user is away from the keyboard.**
 
@@ -298,7 +298,7 @@ frame capture. No browser is involved. Details in **The Test Loop**.
 A workflow completing is not a stopping point. The instant one step's artifact
 exists and its gate accepts it, the next step in the pipeline starts — same
 session, no summary-and-stop. The full ordered chain is in **The Pipeline**
-below; `.zcode/docs/workflow-catalog.yaml` is the source of truth for
+below; `${CLAUDE_PLUGIN_ROOT}/docs/workflow-catalog.yaml` is the source of truth for
 completion checks. The only legitimate ways a run moves from step X to "stop"
 are: the run is genuinely blocked (wrap up) or all steps complete (wrap up).
 
@@ -693,7 +693,7 @@ who didn't produce the work: spawn the **`playtest-reviewer`** subagent.
 project root · engine and binary · build entry · the scripted-input seam's name
 and how to enable it · acceptance-criteria paths · round number and output path
 — and nothing else. The method, evidence bar, rubric and report format live in
-`.zcode/agents/playtest-reviewer.md`, which you pass **by reference, never
+`${CLAUDE_PLUGIN_ROOT}/agents/playtest-reviewer.md`, which you pass **by reference, never
 restated**. Because the build runs **natively**, the reviewer needs only shell
 access to build, run and capture the game itself, so it must do exactly that and
 base its verdict on what it observed. Your own captures may be passed as context
@@ -701,7 +701,7 @@ but are never sufficient on their own. The reviewer is **read-only on source** �
 it has no Edit tool and writes only its own report.
 
 If subagents are unavailable, cold-review: new context, run the build
-yourself, and follow `.zcode/agents/playtest-reviewer.md` as your method and
+yourself, and follow `${CLAUDE_PLUGIN_ROOT}/agents/playtest-reviewer.md` as your method and
 rubric. The implementer's own "looks good to me" is never evidence.
 
 **Stall detection — count, don't vibe.** After each iteration record the
@@ -745,7 +745,7 @@ game is not.
 every dimension below and emit 意见 / 建议 / 疑问 / 缺件. Scoring from a single
 rater keeps the dimensions comparable across rounds. The reviewer's method,
 evidence bar, rubric anchors and output format live in
-`.zcode/agents/playtest-reviewer.md` — that file is the single source; this skill
+`${CLAUDE_PLUGIN_ROOT}/agents/playtest-reviewer.md` — that file is the single source; this skill
 never restates them.
 
 **Mechanism per round**
@@ -760,7 +760,7 @@ never restates them.
 2. **The reviewer plays it itself and produces the evidence** — its own
    timestamped logs and its own BEFORE/ACTION/AFTER frame sequences per MVP
    system, per ending, and for pause/resume. Its full procedure, evidence bar,
-   caps and report format are in `.zcode/agents/playtest-reviewer.md`; hand
+   caps and report format are in `${CLAUDE_PLUGIN_ROOT}/agents/playtest-reviewer.md`; hand
    that file over **by reference** and do not paraphrase it into the prompt.
 3. **Act on what it returns.** It writes its round pack to
    `production/auto-game-in-sleep/test-runs/review-<round>-by-reviewer.md`
@@ -773,7 +773,7 @@ never restates them.
 
 Anchors, the Part A / Part B split (static: 完整度 / 新颖性 / 架构与可维护性;
 from the reviewer's own run: 真实可玩性 / 界面美观性 / 动态体验) and the
-completeness caps live in `.zcode/agents/playtest-reviewer.md`. This skill owns
+completeness caps live in `${CLAUDE_PLUGIN_ROOT}/agents/playtest-reviewer.md`. This skill owns
 **only the gate**, so the rubric has exactly one copy and cannot drift:
 
 - **总分 = mean of the six dimension scores.**
@@ -817,7 +817,7 @@ over inside the loop.
 **Outputs per round (the reviewer writes)**
 
 意见 / 建议 / 疑问 / 缺件清单 — their required contents are specified in
-`.zcode/agents/playtest-reviewer.md`. If a 疑问 blocks acceptance, log it to the
+`${CLAUDE_PLUGIN_ROOT}/agents/playtest-reviewer.md`. If a 疑问 blocks acceptance, log it to the
 blocked list / morning report for the human.
 
 **Reuses (no new machinery)**

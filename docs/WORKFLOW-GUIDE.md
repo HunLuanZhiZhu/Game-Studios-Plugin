@@ -8,7 +8,7 @@
 >
 > The pipeline has 7 phases. Each phase has a formal gate (`/gate-check`)
 > that must pass before you advance. The authoritative phase sequence is
-> defined in `.zcode/docs/workflow-catalog.yaml` and read by `/help`.
+> defined in `${CLAUDE_PLUGIN_ROOT}/docs/workflow-catalog.yaml` and read by `/help`.
 
 ---
 
@@ -233,8 +233,8 @@ Or with a specific engine:
 - Populates `.zcode/docs/technical-preferences.md` with naming conventions,
   performance budgets, and engine-specific defaults
 - Detects knowledge gaps (engine version newer than LLM training data) and
-  advises cross-referencing `docs/engine-reference/`
-- Creates version-pinned reference docs in `docs/engine-reference/`
+  advises cross-referencing `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/`
+- Creates version-pinned reference docs in `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/`
 
 **Why this matters:** Once you set the engine, the system knows which
 engine-specialist agents to use. If you pick Godot, agents like
@@ -1142,7 +1142,7 @@ Bypasses normal sprint processes with a full audit trail:
 
 ```
 Ask Claude to create a post-mortem using the template at
-.zcode/docs/templates/post-mortem.md
+${CLAUDE_PLUGIN_ROOT}/docs/templates/post-mortem.md
 ```
 
 ---
@@ -1174,7 +1174,7 @@ By default they run at every checkpoint. You can control how much review you get
 The `--review` flag works on all gate-using skills. Change the global mode at any
 time by editing `production/review-mode.txt` directly or re-running `/start`.
 
-Full gate definitions and check pattern: `.zcode/docs/director-gates.md`
+Full gate definitions and check pattern: `${CLAUDE_PLUGIN_ROOT}/docs/director-gates.md`
 
 ---
 
@@ -1253,7 +1253,7 @@ The system has 12 hooks that run automatically:
 | `validate-commit.sh` | Before commit | Checks for design doc references, valid JSON, no hardcoded values |
 | `validate-push.sh` | Before push | Warns on pushes to main/develop |
 | `validate-assets.sh` | Before commit | Checks asset naming and size |
-| `validate-skill-change.sh` | Skill file written | Advises running `/skill-test` after `.zcode/skills/` changes |
+| `validate-skill-change.sh` | Skill file written | Advises running `/skill-test` after `${CLAUDE_PLUGIN_ROOT}/skills/` changes |
 | `log-agent.sh` | Agent start | Logs agent invocations for audit trail |
 | `log-agent-stop.sh` | Agent stop | Completes agent audit trail (start + stop) |
 | `session-stop.sh` | Session end | Final session logging |

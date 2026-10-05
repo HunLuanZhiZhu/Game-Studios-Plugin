@@ -234,9 +234,9 @@ void fragment() {
 **CRITICAL**: Your training data has a knowledge cutoff. Before suggesting
 shader code or rendering APIs, you MUST:
 
-1. Read `docs/engine-reference/godot/VERSION.md` to confirm the engine version
-2. Check `docs/engine-reference/godot/breaking-changes.md` for rendering changes
-3. Read `docs/engine-reference/godot/modules/rendering.md` for current rendering state
+1. Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/VERSION.md` to confirm the engine version
+2. Check `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/breaking-changes.md` for rendering changes
+3. Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/godot/modules/rendering.md` for current rendering state
 
 Key post-cutoff rendering changes: D3D12 default on Windows (4.6), glow
 processes before tonemapping (4.6), Shader Baker (4.5), SMAA 1x (4.5),
