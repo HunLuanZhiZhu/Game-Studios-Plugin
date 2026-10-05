@@ -92,8 +92,14 @@ Game-Studios-Plugin/
 ├── hooks/                         # hooks.json + 守卫脚本
 ├── rules/                         # 11 个路径作用域编码规范(种子源)
 ├── docs/                          # 框架文档、模板、引擎参考
+├── .mcp.json                      # Blender MCP 服务器(3D 资产管线)
 └── skills/game-studios-init/      # 工作区脚手架(脚本 + 资产)
 ```
+
+> [!NOTE]
+> 内置的 `.mcp.json` 注册了 **Blender MCP 服务器**(`blender-mcp` →
+> `localhost:9876`),供 3D 资产管线使用。它要求 PATH 中已安装 `blender-mcp`,
+> 且 Blender 已开启其 MCP 插件并运行——否则该服务器只是保持断开,其余功能不受影响。
 
 ## 🖥 宿主兼容性
 

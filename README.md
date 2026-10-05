@@ -92,8 +92,15 @@ Game-Studios-Plugin/
 ├── hooks/                         # hooks.json + guarded scripts
 ├── rules/                         # 11 path-scoped coding standards (seed source)
 ├── docs/                          # Framework docs, templates, engine references
+├── .mcp.json                      # Blender MCP server (3D asset pipeline)
 └── skills/game-studios-init/      # Workspace scaffolder (script + assets)
 ```
+
+> [!NOTE]
+> The bundled `.mcp.json` registers the **Blender MCP server** (`blender-mcp` →
+> `localhost:9876`) used by the 3D asset pipeline. It requires `blender-mcp`
+> installed on your PATH and Blender running with its MCP addon enabled —
+> otherwise the server simply stays disconnected and everything else works.
 
 ## 🖥 Host compatibility
 

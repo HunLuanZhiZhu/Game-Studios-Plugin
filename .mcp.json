@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "blender": {
+      "type": "stdio",
+      "command": "blender-mcp",
+      "args": [
+        "--host",
+        "localhost",
+        "--port",
+        "9876"
+      ]
+    }
+  }
+}
