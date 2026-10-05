@@ -1,6 +1,5 @@
 ---
-globs:
-  - "assets/shaders/**"
+globs: assets/shaders/**
 paths:
   - "assets/shaders/**"
 ---

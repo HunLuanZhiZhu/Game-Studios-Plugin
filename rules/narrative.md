@@ -1,6 +1,5 @@
 ---
-globs:
-  - "design/narrative/**"
+globs: design/narrative/**
 paths:
   - "design/narrative/**"
 ---

@@ -1,6 +1,5 @@
 ---
-globs:
-  - "src/core/**"
+globs: src/core/**
 paths:
   - "src/core/**"
 ---

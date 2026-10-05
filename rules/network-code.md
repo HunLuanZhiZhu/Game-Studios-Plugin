@@ -1,6 +1,5 @@
 ---
-globs:
-  - "src/networking/**"
+globs: src/networking/**
 paths:
   - "src/networking/**"
 ---

@@ -1,6 +1,5 @@
 ---
-globs:
-  - "assets/data/**"
+globs: assets/data/**
 paths:
   - "assets/data/**"
 ---

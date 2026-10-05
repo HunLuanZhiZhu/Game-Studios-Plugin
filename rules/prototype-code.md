@@ -1,6 +1,5 @@
 ---
-globs:
-  - "prototypes/**"
+globs: prototypes/**
 paths:
   - "prototypes/**"
 ---

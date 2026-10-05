@@ -1,6 +1,5 @@
 ---
-globs:
-  - "design/gdd/**"
+globs: design/gdd/**
 paths:
   - "design/gdd/**"
 ---

@@ -1,6 +1,5 @@
 ---
-globs:
-  - "tests/**"
+globs: tests/**
 paths:
   - "tests/**"
 ---

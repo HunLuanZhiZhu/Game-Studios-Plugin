@@ -1,6 +1,5 @@
 ---
-globs:
-  - "src/ai/**"
+globs: src/ai/**
 paths:
   - "src/ai/**"
 ---

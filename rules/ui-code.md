@@ -1,6 +1,5 @@
 ---
-globs:
-  - "src/ui/**"
+globs: src/ui/**
 paths:
   - "src/ui/**"
 ---
