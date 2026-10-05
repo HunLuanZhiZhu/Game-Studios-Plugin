@@ -45,8 +45,8 @@ require), so behavior is identical on every host and every run.
    `.studio/technical-preferences.md` — until then all hooks stay dormant
    by design.
 5. **Verify**: the script prints `[created]`/`[skipped]`/`[updated]` per path
-   and the hooks-marker status. Confirm `AGENTS.md` contains both
-   `<!-- ZCGS:BEGIN -->` and `<!-- ZCGS:END -->`.
+   and the hooks-marker status. Confirm `AGENTS.md` and `CLAUDE.md` contain both
+   `<!-- GAME-STUDIOS:BEGIN -->` and `<!-- GAME-STUDIOS:END -->`.
 6. **Next steps**: `/game-studios:setup-engine` (engine choice) or the full
    onboarding flow (`game-studios:start`).
 

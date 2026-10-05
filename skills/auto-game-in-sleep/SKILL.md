@@ -203,7 +203,8 @@ The run's live state is visible in `production/auto-game-in-sleep/state.json`.
 If the file does not exist, this skill creates it on first entry (Phase 0);
 otherwise the skill reads and resumes from it. Never store live values like
 `current_phase/current_step/last_seen` in `AGENTS.md` — the anti-compression
-anchor there (`<!-- ZCGS:BEGIN -->`, injected by `bash init.sh`) holds only
+anchor there (`<!-- GAME-STUDIOS:BEGIN -->`, injected by the
+`game-studios-init` skill) holds only
 static instructions and pointers; `state.json` (plus `journal.md`) is the truth.
 
 Heartbeat discipline — the FIRST action of every pipeline step:

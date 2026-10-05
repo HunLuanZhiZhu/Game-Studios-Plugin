@@ -22,8 +22,8 @@ set -u
 
 PLUGIN_MARKER=".claude-plugin/plugin.json"
 GITIGNORE_BEGIN="# === Game Studios plugin (managed) ==="
-ANCHOR_BEGIN='<!-- ZCGS:BEGIN -->'
-ANCHOR_END='<!-- ZCGS:END -->'
+ANCHOR_BEGIN='<!-- GAME-STUDIOS:BEGIN -->'
+ANCHOR_END='<!-- GAME-STUDIOS:END -->'
 
 MODE="APPLY"
 DRY=0
@@ -126,7 +126,7 @@ strip_anchor() {
 print_anchor() {
   cat <<ANCHOREOF
 $ANCHOR_BEGIN
-## ZCGS Orchestrator — Anti-Compression Anchor
+## Game Studios Orchestrator — Anti-Compression Anchor
 
 > Managed by the game-studios plugin's init script. Do not edit this block manually — rerun the init skill to refresh.
 > This block is STATIC — it holds instructions and pointers, never live state values.
@@ -163,60 +163,81 @@ $ANCHOR_END
 ANCHOREOF
 }
 
-ensure_agents_md() {
-  agents="$WS/AGENTS.md"
-  if [ ! -f "$agents" ]; then
-    if [ $DRY -eq 0 ]; then
-      {
-        tr -d '\r' < "$ASSETS/AGENTS.template.md"
-        printf '\n%s\n' "$(print_anchor)"
-      } > "$agents"
-    fi
-    say "[created] AGENTS.md (template + anchor)"
-    return
-  fi
-  count=$(grep -cF "$ANCHOR_BEGIN" "$agents" || true)
+ensure_anchor() { # $1 = entry file (absolute), $2 = entry label
+  em_file="$1"
+  em_label="$2"
+  count=$(grep -cF "$ANCHOR_BEGIN" "$em_file" || true)
   if [ "$count" -gt 1 ]; then
-    die "multiple anchor blocks in AGENTS.md — dedupe manually before rerunning"
+    die "multiple anchor blocks in $em_label — dedupe manually before rerunning"
   fi
   if [ "$count" -eq 1 ]; then
     old_block="$(awk -v b="$ANCHOR_BEGIN" -v e="$ANCHOR_END" '
       index($0, b) { inblk = 1 }
       inblk { print }
       inblk && index($0, e) { inblk = 0 }
-    ' "$agents")"
+    ' "$em_file")"
     new_block="$(print_anchor)"
     # Compare ignoring the initialized timestamp line.
-    old_cmp="$(printf '%s\n' "$old_block" | grep -v '^<!-- initialized:')"
-    new_cmp="$(printf '%s\n' "$new_block" | grep -v '^<!-- initialized:')"
+    old_cmp="$(printf '%s
+' "$old_block" | grep -v '^<!-- initialized:')"
+    new_cmp="$(printf '%s
+' "$new_block" | grep -v '^<!-- initialized:')"
     if [ "$old_cmp" = "$new_cmp" ]; then
-      say "[skipped] AGENTS.md anchor (up to date)"
+      say "[skipped] $em_label anchor (up to date)"
       return
     fi
     if [ $DRY -eq 0 ]; then
-      stripped="$(strip_anchor "$agents")"
-      printf '%s\n\n%s\n' "$stripped" "$new_block" > "$agents"
+      stripped="$(strip_anchor "$em_file")"
+      printf '%s
+
+%s
+' "$stripped" "$new_block" > "$em_file"
     fi
-    say "[updated] AGENTS.md anchor (refreshed)"
+    say "[updated] $em_label anchor (refreshed)"
   else
     if [ $DRY -eq 0 ]; then
-      existing="$(cat "$agents")"
-      printf '%s\n\n%s\n' "$existing" "$(print_anchor)" > "$agents"
+      existing="$(cat "$em_file")"
+      printf '%s
+
+%s
+' "$existing" "$(print_anchor)" > "$em_file"
     fi
-    say "[updated] AGENTS.md (anchor appended)"
+    say "[updated] $em_label (anchor appended)"
   fi
 }
 
-ensure_claude_md() {
-  claudemd="$WS/CLAUDE.md"
-  if [ -f "$claudemd" ]; then
-    say "[skipped] CLAUDE.md (already exists)"
+ensure_agents_md() {
+  ag_file="$WS/AGENTS.md"
+  if [ ! -f "$ag_file" ]; then
+    if [ $DRY -eq 0 ]; then
+      {
+        tr -d '' < "$ASSETS/AGENTS.template.md"
+        printf '
+%s
+' "$(print_anchor)"
+      } > "$ag_file"
+    fi
+    say "[created] AGENTS.md (template + anchor)"
     return
   fi
-  if [ $DRY -eq 0 ]; then
-    tr -d '\r' < "$ASSETS/CLAUDE.template.md" > "$claudemd"
+  ensure_anchor "$ag_file" "AGENTS.md"
+}
+
+ensure_claude_md() {
+  cl_file="$WS/CLAUDE.md"
+  if [ ! -f "$cl_file" ]; then
+    if [ $DRY -eq 0 ]; then
+      {
+        tr -d '' < "$ASSETS/CLAUDE.template.md"
+        printf '
+%s
+' "$(print_anchor)"
+      } > "$cl_file"
+    fi
+    say "[created] CLAUDE.md (standalone CC entry + anchor)"
+    return
   fi
-  say "[created] CLAUDE.md (@AGENTS.md entry point)"
+  ensure_anchor "$cl_file" "CLAUDE.md"
 }
 
 ensure_gitignore() {
