@@ -1,0 +1,9 @@
+# === Game Studios plugin (managed) ===
+production/session-logs/
+.zcode/settings.local.json
+AGENTS.local.md
+docs/consistency-failures.md
+__pycache__/
+*.pyc
+# Engine-specific ignores (e.g. .godot/) are added by /game-studios:setup-engine
+# === Game Studios plugin (end managed block) ===
