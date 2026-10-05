@@ -3,7 +3,7 @@
 ```text
 /
 ├── AGENTS.md                    # Master configuration
-├── .studio/                    # Project-local config (technical-preferences.md, rules/, statusline.sh)
+├── .studio/                    # Project-local config (technical-preferences.md, statusline.sh)
 ├── src/                         # Game source code (core, gameplay, ai, networking, ui, tools)
 ├── assets/                      # Game assets (art, audio, vfx, shaders, data)
 ├── design/                      # Game design documents (gdd, narrative, levels, balance)

@@ -274,7 +274,6 @@ AGENTS.md                          -- Master config (read this first, ~60 lines)
 .studio/                           -- Project-local config (plugin convention)
   technical-preferences.md         -- Project-specific standards (populated by /setup-engine)
   statusline.sh                    -- Production-stage status line script
-  rules/                           -- Path-scoped coding standards (reference copies)
 .zcode/settings.json + .claude/settings.json
                                    -- Host settings (status line command, permissions)
 

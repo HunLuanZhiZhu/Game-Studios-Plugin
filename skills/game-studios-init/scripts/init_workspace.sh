@@ -249,8 +249,6 @@ ensure_dirs
 copy_file "$PLUGIN_ROOT/docs/technical-preferences.md" ".studio/technical-preferences.md"
 copy_file "$PLUGIN_ROOT/docs/registry/architecture.yaml" "docs/registry/architecture.yaml"
 copy_file "$PLUGIN_ROOT/docs/architecture/tr-registry.yaml" "docs/architecture/tr-registry.yaml"
-copy_tree "$PLUGIN_ROOT/rules" ".studio/rules"
-copy_tree "$PLUGIN_ROOT/rules" ".zcode/rules"
 copy_tree "$PLUGIN_ROOT/rules" ".claude/rules"
 copy_file "$ASSETS/settings.json" ".zcode/settings.json"
 copy_file "$ASSETS/settings.json" ".claude/settings.json"
