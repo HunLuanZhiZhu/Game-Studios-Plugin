@@ -1,4 +1,6 @@
 ---
+globs:
+  - "prototypes/**"
 paths:
   - "prototypes/**"
 ---

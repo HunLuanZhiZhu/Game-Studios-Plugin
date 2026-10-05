@@ -1,4 +1,6 @@
 ---
+globs:
+  - "src/gameplay/**"
 paths:
   - "src/gameplay/**"
 ---

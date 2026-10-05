@@ -1,4 +1,6 @@
 ---
+globs:
+  - "design/gdd/**"
 paths:
   - "design/gdd/**"
 ---

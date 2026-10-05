@@ -20,7 +20,7 @@ require), so behavior is identical on every host and every run.
 |---|---|---|
 | `.studio/technical-preferences.md` | plugin `docs/technical-preferences.md` | Per-project config with `[TO BE CONFIGURED]` placeholders; filled by `/game-studios:setup-engine`; **marker file that activates all hooks** |
 | `.zcode/settings.json` + `.claude/settings.json` (dual-written) + `.studio/statusline.sh` | skill assets | Host plumbing for ZCode and Claude Code: permission guardrails + production-stage status line (statusline script lives in the neutral `.studio/` dir) |
-| `.studio/rules/` (11 files) | plugin `rules/` | Path-scoped coding standards (reference copies in the neutral dir) |
+| `.studio/rules/` + `.zcode/rules/` + `.claude/rules/` (11 files each) | plugin `rules/` | Path-scoped coding standards; auto-enforced by ZCode (`.zcode/rules/`, `paths` frontmatter) and Claude Code (`.claude/rules/`, `globs` frontmatter); `.studio/rules/` is the neutral reference copy |
 | `docs/registry/architecture.yaml` | plugin `docs/registry/architecture.yaml` | Empty scaffold; `/game-studios:architecture-decision` appends with user approval |
 | `docs/architecture/tr-registry.yaml` | plugin `docs/architecture/tr-registry.yaml` | Empty scaffold; keeps TR-IDs stable across runs |
 | `AGENTS.md` | skill asset template | Collaboration protocol, stack placeholders, anti-compression anchor (created only if missing) |
