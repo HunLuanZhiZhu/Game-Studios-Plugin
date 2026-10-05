@@ -44,7 +44,7 @@ sudo pacman -S jq       # Arch
 
 ### Windows
 - Git for Windows includes **Git Bash**, which provides the `bash` command
-  used by all hooks in `settings.json`
+  wired in `hooks/hooks.json`
 - Ensure Git Bash is on your PATH (default if installed via the Git installer)
 - Hooks use `bash ${CLAUDE_PLUGIN_ROOT}/hooks/[name].sh` — this works on Windows because
   Claude Code invokes commands through a shell that can find `bash.exe`
