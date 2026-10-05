@@ -1,0 +1,11 @@
+{
+  "name": "game-studios-plugin",
+  "owner": { "name": "HunLuanZhiZhu" },
+  "plugins": [
+    {
+      "name": "game-studios",
+      "description": "Game Studios multi-agent framework: agents, skills, hooks — one plugin",
+      "source": "./"
+    }
+  ]
+}
