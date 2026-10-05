@@ -1,6 +1,6 @@
 # Path-Specific Rules
 
-Rules are seeded into the workspace by `/game-studios-init` in three places: `.claude/rules/` (Claude Code auto-enforcement, `globs` frontmatter), `.zcode/rules/` (ZCode auto-enforcement, `paths` frontmatter), and `.studio/rules/` (neutral reference copy). Rule files carry both frontmatter keys so every host understands them. Editing a file in a matching path auto-loads the rule:
+Rules are seeded into the workspace by `/game-studios-init` in three places: `.claude/rules/` (Claude Code auto-enforcement, `globs` frontmatter), `.zcode/rules/` (ZCode — auto-enforcement unverified, honored via AGENTS.md imports), and `.studio/rules/` (neutral reference copy). Rule files carry both frontmatter keys so every host understands them. Editing a file in a matching path auto-loads the rule:
 
 | Rule File | Path Pattern | Enforces |
 | ---- | ---- | ---- |

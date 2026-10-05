@@ -207,6 +207,18 @@ ensure_agents_md() {
   fi
 }
 
+ensure_claude_md() {
+  claudemd="$WS/CLAUDE.md"
+  if [ -f "$claudemd" ]; then
+    say "[skipped] CLAUDE.md (already exists)"
+    return
+  fi
+  if [ $DRY -eq 0 ]; then
+    tr -d '\r' < "$ASSETS/CLAUDE.template.md" > "$claudemd"
+  fi
+  say "[created] CLAUDE.md (@AGENTS.md entry point)"
+}
+
 ensure_gitignore() {
   gi="$WS/.gitignore"
   if [ -f "$gi" ] && grep -qF "$GITIGNORE_BEGIN" "$gi"; then
@@ -244,6 +256,7 @@ copy_file "$ASSETS/settings.json" ".zcode/settings.json"
 copy_file "$ASSETS/settings.json" ".claude/settings.json"
 copy_file "$ASSETS/statusline.sh" ".studio/statusline.sh"
 ensure_agents_md
+ensure_claude_md
 ensure_gitignore
 
 echo ""

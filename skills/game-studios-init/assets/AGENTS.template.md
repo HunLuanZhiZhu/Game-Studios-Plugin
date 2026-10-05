@@ -15,6 +15,24 @@ Indie game development managed through the **game-studios** plugin
 
 @.studio/technical-preferences.md
 
+## Coding Standards (path-scoped rules)
+
+These rule files are imported so coding standards are always in context.
+They also exist as host-scoped copies: `.claude/rules/` (Claude Code,
+`globs` frontmatter) and `.zcode/rules/` (ZCode; auto-enforcement unverified).
+
+@.studio/rules/engine-code.md
+@.studio/rules/gameplay-code.md
+@.studio/rules/ai-code.md
+@.studio/rules/network-code.md
+@.studio/rules/ui-code.md
+@.studio/rules/shader-code.md
+@.studio/rules/data-files.md
+@.studio/rules/test-standards.md
+@.studio/rules/design-docs.md
+@.studio/rules/narrative.md
+@.studio/rules/prototype-code.md
+
 ## Collaboration Protocol
 
 **User-driven collaboration, not autonomous execution.**
