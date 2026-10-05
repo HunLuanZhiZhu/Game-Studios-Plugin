@@ -48,6 +48,6 @@ Per-project paths stay workspace-relative on purpose: `src/`, `design/`,
 - [x] Reference remap: framework paths use `${CLAUDE_PLUGIN_ROOT}`
 - [ ] Host verification: plugin discovery (incl. `source: "./"` self-reference),
       skills/agents namespaces, `${CLAUDE_PLUGIN_ROOT}` expansion in SKILL.md bodies
-- [x] Host-agnostic scaffolder: `/game-studios-init` (Python, stdlib-only; copies
+- [x] Host-agnostic scaffolder: `/game-studios-init` (POSIX sh + awk; copies
       per-project seeds, generates AGENTS.md anchor, merges .gitignore)
 - [ ] Clean-room E2E install test, CI packaging

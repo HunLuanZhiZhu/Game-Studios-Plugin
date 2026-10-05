@@ -11,8 +11,8 @@ Turns the current workspace into a Game Studios project. Idempotent: safe to
 rerun; **existing files are never overwritten** — the managed anchor block in
 `AGENTS.md` and the managed block in `.gitignore` are the only content ever
 replaced in place. All mechanical work is done by a cross-platform (Windows /
-Linux / macOS) stdlib-only Python script, so behavior is identical on every
-host and every run.
+Linux / macOS) POSIX-sh script (bash + awk — the same runtime the hooks already
+require), so behavior is identical on every host and every run.
 
 ## What the script copies (and why)
 
@@ -33,12 +33,12 @@ host and every run.
    `docs/` already exist and whether this is a brownfield project. If files
    the script would create already hold user content, confirm scope with the
    user before applying (copies skip existing files, so nothing is lost).
-2. **Locate the script**: `scripts/init_workspace.py` next to this file. The
+2. **Locate the script**: `scripts/init_workspace.sh` next to this file. The
    script resolves the plugin root from its own location; no environment
-   variable is needed. Interpreter fallback order: `python3` → `python` → `py`.
+   variable is needed. It runs with bash and uses awk only — no sed multiline, no Python.
 3. **Run with `--check`** to survey without writing, review the report with
    the user, then run without flags to apply:
-   `python <skill-dir>/scripts/init_workspace.py "<workspace-dir>"`
+   `bash <skill-dir>/scripts/init_workspace.sh "<workspace-dir>"`
 4. **Post-run polish** (interactive): put the project name/title into
    `AGENTS.md`; remind the user that `/game-studios:setup-engine` populates
    `.zcode/docs/technical-preferences.md` — until then all hooks stay dormant
