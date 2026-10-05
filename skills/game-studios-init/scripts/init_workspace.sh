@@ -72,27 +72,31 @@ esac
 # ── helpers ───────────────────────────────────────────────────────────────
 # Copy a file as LF text (strip CR so autocrlf checkouts cannot poison
 # bash scripts / JSON in the target workspace).
+# NOTE: sh has no locals — every function uses its own cf_/en_/gi_ prefixed
+# names so nested calls cannot clobber each other's state.
 copy_file() { # $1 = absolute source, $2 = workspace-relative destination
-  src="$1"
-  dst_rel="$2"
-  dst="$WS/$dst_rel"
-  if [ -e "$dst" ]; then
-    say "[skipped] $dst_rel (already exists)"
+  cf_src="$1"
+  cf_dst_rel="$2"
+  cf_dst="$WS/$cf_dst_rel"
+  if [ -e "$cf_dst" ]; then
+    say "[skipped] $cf_dst_rel (already exists)"
     return
   fi
   if [ $DRY -eq 0 ]; then
-    mkdir -p "$(dirname "$dst")"
-    tr -d '\r' < "$src" > "$dst"
+    mkdir -p "$(dirname "$cf_dst")"
+    tr -d '\r' < "$cf_src" > "$cf_dst"
   fi
-  say "[created] $dst_rel"
+  say "[created] $cf_dst_rel"
 }
 
 copy_tree() { # $1 = absolute source dir, $2 = workspace-relative base
-  src="$1"
-  base="$2"
-  find "$src" -type f -print0 | while IFS= read -r -d '' f; do
-    rel="${f#"$src"/}"
-    copy_file "$f" "$base/$rel"
+  ct_src="$1"
+  ct_base="$2"
+  # Subshell keeps the cd confined; "./"-relative find output avoids any
+  # prefix comparison (MSYS pwd may return Windows form, find POSIX form).
+  ( cd "$ct_src" && find . -type f -print0 ) | while IFS= read -r -d '' f; do
+    rel="${f#./}"
+    copy_file "$ct_src/$rel" "$ct_base/$rel"
   done
 }
 
@@ -230,18 +234,19 @@ echo "  workspace   : $WS"
 echo ""
 
 ensure_dirs
-copy_file "$PLUGIN_ROOT/docs/technical-preferences.md" ".zcode/docs/technical-preferences.md"
+copy_file "$PLUGIN_ROOT/docs/technical-preferences.md" ".studio/technical-preferences.md"
 copy_file "$PLUGIN_ROOT/docs/registry/architecture.yaml" "docs/registry/architecture.yaml"
 copy_file "$PLUGIN_ROOT/docs/architecture/tr-registry.yaml" "docs/architecture/tr-registry.yaml"
-copy_tree "$PLUGIN_ROOT/rules" ".zcode/rules"
+copy_tree "$PLUGIN_ROOT/rules" ".studio/rules"
 copy_file "$ASSETS/settings.json" ".zcode/settings.json"
-copy_file "$ASSETS/statusline.sh" ".zcode/statusline.sh"
+copy_file "$ASSETS/settings.json" ".claude/settings.json"
+copy_file "$ASSETS/statusline.sh" ".studio/statusline.sh"
 ensure_agents_md
 ensure_gitignore
 
 echo ""
-if [ -f "$WS/.zcode/docs/technical-preferences.md" ]; then
-  say "hooks marker : .zcode/docs/technical-preferences.md OK"
+if [ -f "$WS/.studio/technical-preferences.md" ]; then
+  say "hooks marker : .studio/technical-preferences.md OK"
 else
   say "hooks marker : MISSING (hooks stay dormant until /game-studios:setup-engine run)"
 fi

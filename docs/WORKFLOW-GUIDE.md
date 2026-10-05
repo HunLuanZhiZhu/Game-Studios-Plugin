@@ -77,7 +77,7 @@ Recent commits:
 ===================================
 ```
 
-If you see this, hooks are working. If not, check `.zcode/settings.json` to
+If you see this, hooks are working. If not, check the workspace host settings (`.zcode/settings.json` for ZCode, `.claude/settings.json` for Claude Code) to
 make sure the hook paths are correct for your OS.
 
 ### Step 4: Ask for Help Anytime
@@ -230,7 +230,7 @@ Or with a specific engine:
 
 **What /setup-engine does:**
 
-- Populates `.zcode/docs/technical-preferences.md` with naming conventions,
+- Populates `.studio/technical-preferences.md` with naming conventions,
   performance budgets, and engine-specific defaults
 - Detects knowledge gaps (engine version newer than LLM training data) and
   advises cross-referencing `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/`

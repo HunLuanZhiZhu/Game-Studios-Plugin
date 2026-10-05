@@ -65,7 +65,7 @@ lenient default.
   when the project has none set. This location note applies only to the Godot
   default; when `ENGINE` is overridden with another engine, it no longer
   applies. Passed to `/setup-engine`. If an engine is already configured in
-  `.zcode/docs/technical-preferences.md`, the run respects it; otherwise it
+  `.studio/technical-preferences.md`, the run respects it; otherwise it
   configures `ENGINE`. Godot is the default because its 2D pipeline, headless
   mode, and export tooling give the fastest unattended iteration.
 - **Web delivery is out of scope for this pipeline.** Producing a browser build,
@@ -434,7 +434,7 @@ order and the repeat rules). Invoke each step's skill via the Skill tool and
 follow its process, with interactive pauses suspended per rule 1.
 
 **Concept**
-1. `/setup-engine [ENGINE]` → `.zcode/docs/technical-preferences.md` names a real engine. When none is configured, configure `ENGINE` (default Godot); if one is already set, respect it.
+1. `/setup-engine [ENGINE]` → `.studio/technical-preferences.md` names a real engine. When none is configured, configure `ENGINE` (default Godot); if one is already set, respect it.
    **Passing an engine argument skips `/setup-engine`'s guided questions, so this run must supply those answers explicitly** — `TARGET_PLATFORMS` (platform), `DIMENSION` (2D/3D/both), `DEV_LANGUAGE`, `PHYSICS_BACKEND`, `PRIMARY_INPUT`, `TOUCH_SUPPORT` and `PERF_BUDGET` — and let `/setup-engine` derive gamepad support from the platform with its own mapping table.
    Acceptance: `technical-preferences.md` names a real engine, records **all** of the above plus a concrete `Rendering` and `Physics` entry, and the local build boots. **A `[TO BE CONFIGURED]` left in Engine & Language or Input & Platform is a failure of this step** — nothing later in the pipeline will fill it. Font packaging for a browser build is **not** verified here; that belongs to `/web-export`.
 2. Concept document exists (done in bootstrap, or `/brainstorm` for an existing vague project) → `design/gdd/game-concept.md`

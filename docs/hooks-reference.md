@@ -1,6 +1,6 @@
 # Active Hooks
 
-Hooks are registered by this plugin in `hooks/hooks.json` and fire whenever the plugin is installed and enabled. `.zcode/settings.json` is retained only as a legacy status-line/permission reference and does not register hooks.
+Hooks are registered by this plugin in `hooks/hooks.json` and fire whenever the plugin is installed and enabled. Workspace host settings live at `.zcode/settings.json` (ZCode) and `.claude/settings.json` (Claude Code); they carry status-line and permission settings only — hook registration lives in `hooks/hooks.json`.
 
 | Hook | Event | Trigger | Action |
 | ---- | ----- | ------- | ------ |

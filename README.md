@@ -39,7 +39,7 @@ directory first — e.g. ZCode caches installed plugins under
 
 Per-project paths stay workspace-relative on purpose: `src/`, `design/`,
 `production/`, `docs/architecture/` (project output), and
-`.zcode/docs/technical-preferences.md` (per-project config, scaffolded by
+`.studio/technical-preferences.md` (per-project config, scaffolded by
 `/game-studios-init`).
 
 ## Roadmap

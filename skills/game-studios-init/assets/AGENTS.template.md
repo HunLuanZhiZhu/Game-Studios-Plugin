@@ -13,7 +13,7 @@ Indie game development managed through the **game-studios** plugin
 
 ## Technical Preferences
 
-@.zcode/docs/technical-preferences.md
+@.studio/technical-preferences.md
 
 ## Collaboration Protocol
 

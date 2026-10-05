@@ -3,7 +3,7 @@
 ```text
 /
 ├── AGENTS.md                    # Master configuration
-├── .zcode/                     # Project-local config (settings.json, technical-preferences.md)
+├── .studio/                    # Project-local config (technical-preferences.md, rules/, statusline.sh)
 ├── src/                         # Game source code (core, gameplay, ai, networking, ui, tools)
 ├── assets/                      # Game assets (art, audio, vfx, shaders, data)
 ├── design/                      # Game design documents (gdd, narrative, levels, balance)
@@ -16,4 +16,4 @@
     └── session-logs/            # Session audit trail (gitignored)
 ```
 
-> Framework content (agents, skills, hooks, rules, docs — including engine-reference/) is served from the game-studios plugin install directory; the workspace only holds project-local config and outputs.
+> Framework content (agents, skills, hooks, rules, docs — including engine-reference/) is served from the game-studios plugin install directory; the workspace only holds project-local config and outputs. Host settings live at `.zcode/settings.json` (ZCode) and `.claude/settings.json` (Claude Code).

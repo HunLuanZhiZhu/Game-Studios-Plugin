@@ -18,9 +18,9 @@ require), so behavior is identical on every host and every run.
 
 | Workspace path | Source | Why |
 |---|---|---|
-| `.zcode/docs/technical-preferences.md` | plugin `docs/technical-preferences.md` | Per-project config with `[TO BE CONFIGURED]` placeholders; filled by `/game-studios:setup-engine`; **marker file that activates all hooks** |
-| `.zcode/settings.json` + `.zcode/statusline.sh` | skill assets | Host defaults: permission guardrails + production-stage status line |
-| `.zcode/rules/` (11 files) | plugin `rules/` | Path-scoped coding standards — copied so ZCode auto-enforces them in this workspace |
+| `.studio/technical-preferences.md` | plugin `docs/technical-preferences.md` | Per-project config with `[TO BE CONFIGURED]` placeholders; filled by `/game-studios:setup-engine`; **marker file that activates all hooks** |
+| `.zcode/settings.json` + `.claude/settings.json` (dual-written) + `.studio/statusline.sh` | skill assets | Host plumbing for ZCode and Claude Code: permission guardrails + production-stage status line (statusline script lives in the neutral `.studio/` dir) |
+| `.studio/rules/` (11 files) | plugin `rules/` | Path-scoped coding standards (reference copies in the neutral dir) |
 | `docs/registry/architecture.yaml` | plugin `docs/registry/architecture.yaml` | Empty scaffold; `/game-studios:architecture-decision` appends with user approval |
 | `docs/architecture/tr-registry.yaml` | plugin `docs/architecture/tr-registry.yaml` | Empty scaffold; keeps TR-IDs stable across runs |
 | `AGENTS.md` | skill asset template | Collaboration protocol, stack placeholders, anti-compression anchor (created only if missing) |
@@ -29,7 +29,7 @@ require), so behavior is identical on every host and every run.
 
 ## Procedure
 
-1. **Survey first.** Check whether `AGENTS.md`, `.zcode/`, `src/`, `design/`,
+1. **Survey first.** Check whether `AGENTS.md`, `.studio/`, `src/`, `design/`,
    `docs/` already exist and whether this is a brownfield project. If files
    the script would create already hold user content, confirm scope with the
    user before applying (copies skip existing files, so nothing is lost).
@@ -41,7 +41,7 @@ require), so behavior is identical on every host and every run.
    `bash <skill-dir>/scripts/init_workspace.sh "<workspace-dir>"`
 4. **Post-run polish** (interactive): put the project name/title into
    `AGENTS.md`; remind the user that `/game-studios:setup-engine` populates
-   `.zcode/docs/technical-preferences.md` — until then all hooks stay dormant
+   `.studio/technical-preferences.md` — until then all hooks stay dormant
    by design.
 5. **Verify**: the script prints `[created]`/`[skipped]`/`[updated]` per path
    and the hooks-marker status. Confirm `AGENTS.md` contains both

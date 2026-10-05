@@ -1,6 +1,8 @@
 #!/bin/bash
 # Claude Code PostToolUse hook: Advises running skill-test after skill file changes
-# Fires when any file inside .zcode/skills/ is written or edited.
+# Fires when any file inside a skills/ directory is written or edited — covers
+# plugin-installed skills (<plugin-root>/skills/...) and workspace skills
+# (.zcode/skills/..., .agents/skills/...) alike.
 #
 # Exit behavior:
 #   exit 0 = advisory only (non-blocking)
@@ -20,13 +22,14 @@ fi
 # Normalize path separators (Windows backslash to forward slash)
 FILE_PATH=$(echo "$FILE_PATH" | sed 's|\\|/|g')
 
-# Only act on files inside .zcode/skills/
-if ! echo "$FILE_PATH" | grep -qE '(^|/)\.zcode/skills/'; then
+# Only act on files inside a skills/<skill-name>/ directory
+if ! echo "$FILE_PATH" | grep -qE '(^|/)skills/[^/]+/'; then
     exit 0
 fi
 
-# Extract skill name from path (.zcode/skills/[skill-name]/SKILL.md)
-SKILL_NAME=$(echo "$FILE_PATH" | grep -oE '\.zcode/skills/[^/]+' | sed 's|\.zcode/skills/||')
+# Extract skill name from the last skills/ segment in the path
+# (.../skills/[skill-name]/...)
+SKILL_NAME=$(echo "$FILE_PATH" | grep -oE '(^|/)skills/[^/]+' | tail -n 1 | sed 's|^/*skills/||')
 
 if [ -z "$SKILL_NAME" ]; then
     exit 0

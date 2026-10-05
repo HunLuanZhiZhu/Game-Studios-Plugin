@@ -115,7 +115,7 @@ Prototype code is disposable. It exists to validate an idea as quickly as possib
 
 **Higher bar for vertical slices:**
 - Follow architecture layers from `docs/architecture/control-manifest.md`
-- Naming conventions from `.zcode/docs/technical-preferences.md`
+- Naming conventions from `.studio/technical-preferences.md`
 - No hardcoded gameplay values — use constants or config files
 - Basic error handling on critical paths
 - Placeholder art acceptable; representative art preferred

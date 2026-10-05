@@ -1,6 +1,7 @@
 # === Game Studios plugin (managed) ===
 production/session-logs/
 .zcode/settings.local.json
+.claude/settings.local.json
 AGENTS.local.md
 docs/consistency-failures.md
 __pycache__/

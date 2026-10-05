@@ -118,7 +118,7 @@ If yes, create the directory. Every file must begin with:
 
 **Quality standards** — higher than concept prototype, not full production:
 - Follow architecture layers from `docs/architecture/control-manifest.md`
-- Naming conventions from `.zcode/docs/technical-preferences.md`
+- Naming conventions from `.studio/technical-preferences.md`
 - No hardcoded gameplay values — use constants or config files
 - Basic error handling on critical paths
 - Placeholder art acceptable; representative art preferred

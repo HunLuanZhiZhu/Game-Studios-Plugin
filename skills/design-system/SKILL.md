@@ -161,7 +161,7 @@ Map the system's category (from systems-index.md) to an engine domain:
 | Dialogue, quests, narrative | Scripting |
 
 **Step 2 — Read engine context (if available):**
-- Read `.zcode/docs/technical-preferences.md` to identify the engine and version
+- Read `.studio/technical-preferences.md` to identify the engine and version
 - If engine is configured, read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/[engine]/VERSION.md`
 - Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/[engine]/modules/[domain].md` if it exists
 - Read `${CLAUDE_PLUGIN_ROOT}/docs/engine-reference/[engine]/breaking-changes.md` for domain-relevant entries

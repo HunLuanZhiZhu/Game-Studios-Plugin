@@ -218,7 +218,7 @@ If you already know what you need, jump directly to the relevant path:
    - Produces a game concept document and recommends an engine
 2. **Set up the engine** — Run `/setup-engine` (uses the brainstorm recommendation)
    - Configures AGENTS.md, detects knowledge gaps, populates reference docs
-   - Creates `.zcode/docs/technical-preferences.md` with naming conventions,
+   - Creates `.studio/technical-preferences.md` with naming conventions,
      performance budgets, and engine-specific defaults
    - If the engine version is newer than the LLM's training data, it fetches
      current docs from the web so agents suggest correct APIs
@@ -271,10 +271,12 @@ If you have design docs, prototypes, or code already:
 
 ```
 AGENTS.md                          -- Master config (read this first, ~60 lines)
-.zcode/                            -- Project-local config only
-  settings.json                    -- Host status-line/permission settings
-  docs/
-    technical-preferences.md       -- Project-specific standards (populated by /setup-engine)
+.studio/                           -- Project-local config (plugin convention)
+  technical-preferences.md         -- Project-specific standards (populated by /setup-engine)
+  statusline.sh                    -- Production-stage status line script
+  rules/                           -- Path-scoped coding standards (reference copies)
+.zcode/settings.json + .claude/settings.json
+                                   -- Host settings (status line command, permissions)
 
 Framework content below is served from the game-studios plugin install
 directory (${CLAUDE_PLUGIN_ROOT}), not stored in the workspace:

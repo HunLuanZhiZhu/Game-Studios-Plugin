@@ -4,7 +4,7 @@
 # Plain-text stdout does not enter model context; wrap it into the protocol
 # JSON so the content is injected as additionalContext.
 DIR="$(cd "$(dirname "$0")" && pwd)"
-[ -f ".zcode/docs/technical-preferences.md" ] || exit 0
+[ -f ".studio/technical-preferences.md" ] || exit 0
 out=$(bash "$DIR/$1" 2>/dev/null | tr -d '\r')
 [ -z "$out" ] && exit 0
 PYTHON_CMD=""
