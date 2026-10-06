@@ -47,7 +47,25 @@ require), so behavior is identical on every host and every run.
 5. **Verify**: the script prints `[created]`/`[skipped]`/`[updated]` per path
    and the hooks-marker status. Confirm `AGENTS.md` and `CLAUDE.md` contain both
    `<!-- GAME-STUDIOS:BEGIN -->` and `<!-- GAME-STUDIOS:END -->`.
-6. **Next steps**: `/game-studios:setup-engine` (engine choice) or the full
+6. **Environment inventory.** Run
+   `bash <skill-dir>/scripts/env_inventory.sh` (add `--no-launch` to keep it
+   strictly read-only) and walk the user through the three sections:
+   - **Game engines** — detects Godot / Unity / Unreal (PATH, program
+     directories, drive-root scan, registry). If none are found, recommend
+     https://godotengine.org/download (free, open source).
+   - **Blender / MCP** — probes the Blender MCP addon socket on
+     `127.0.0.1:9876` and the `blender-mcp` bridge CLI. If the socket is down:
+     Blender installed but not running → the script launches Blender and
+     re-probes; if it is still down (or Blender is not installed at all), tell
+     the user that if they need Blender they should follow
+     https://www.blender.org/lab/mcp-server/ (Blender 5.1+, add-on + MCP server).
+   - **ComfyUI** — discovers the install (`COMFYUI_HOME` → Desktop registry →
+     shallow scan, same order as the comfyui-headless skills), then checks
+     which of the expected Qwen-Image-2.1 and Pixal3D/TRELLIS.2 weight files
+     are actually registered (server API on port 8188 when running, otherwise
+     the registered model roots). image21 needs one file per type; pixal3d
+     needs all 8.
+7. **Next steps**: `/game-studios:setup-engine` (engine choice) or the full
    onboarding flow (`game-studios:start`).
 
 ## Notes
