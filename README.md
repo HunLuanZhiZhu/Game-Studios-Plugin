@@ -19,7 +19,7 @@
 > [!IMPORTANT]
 > Derived from **[Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)** by Donchitos — MIT, attribution preserved.  
 > Development home & first dogfood workspace: **[ZCode-Game-Studios](https://github.com/HunLuanZhiZhu/ZCode-Game-Studios)**.  
-> Host-neutral: built on the Claude Code plugin spec — **Claude Code**, **Codex**, and similar-behavior coding agents (**ZCode**, **OpenCode**) are first-class hosts.
+> Host-neutral: built on the Claude Code plugin spec — **Claude Code**, **Codex**, and similar-behavior coding agents (**ZCode**) are first-class hosts.
 
 ---
 
@@ -139,12 +139,12 @@ Game-Studios-Plugin/
 
 ## 🖥 Host compatibility
 
-| Capability | Claude Code | ZCode | OpenCode | Codex |
-|---|---|---|---|---|
-| Skills & agents | ✅ `game-studios:<skill>` | ✅ | ✅ | ✅ skills native; agents via `.codex/agents/` seeds |
-| Hooks — guards, context, audit | ✅ full set | ✅ supported subset | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
-| Rules (`.claude/rules/`) | ✅ verified auto-enforcement | ✅ native | ✅ native | ❌ referenced from `AGENTS.md` (no native path-scoped rules) |
-| Status line | ✅ | ✅ | ❌ n/a | ❌ n/a |
+| Capability | Claude Code | ZCode | Codex |
+|---|---|---|---|
+| Skills & agents | ✅ `game-studios:<skill>` | ✅ | ✅ skills native; agents via `.codex/agents/` seeds |
+| Hooks — guards, context, audit | ✅ full set | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
+| Rules | ✅ native (`.claude/rules/`, verified auto-enforcement) | ✅ via `AGENTS.md` | ✅ via `AGENTS.md` |
+| Status line (init-seeded `statusline.sh`) | ✅ | ✅ | ❌ n/a |
 
 ## 🧭 Path conventions
 
@@ -158,19 +158,6 @@ Per-project paths stay workspace-relative on purpose: `src/`, `design/`,
 `production/`, `docs/architecture/` (project output), and
 `.studio/technical-preferences.md` (per-project config, scaffolded by
 `/game-studios-init`).
-
-## 🗺 Roadmap
-
-- [x] Single-plugin architecture: agents, skills, hooks, rules, docs
-- [x] Reference remap: framework paths use `${CLAUDE_PLUGIN_ROOT}`
-- [x] `game-studios-init` — idempotent cross-platform workspace scaffolder
-- [x] Codex adaptation: portable `plugin.json`/`mcp.json`, agents converted to
-      `.codex/agents/*.toml`, shared `hooks/hooks.json`
-- [x] Host verification: ZCode desktop install verified (manual install; skills
-      and hooks live, plugin cache at
-      `~/.zcode/cli/plugins/cache/<marketplace>/<plugin>/<version>/`)
-- [ ] Clean-room E2E install test (Claude Code / Codex)
-- [ ] CI packaging & versioned releases
 
 ## 📄 License & attribution
 
