@@ -1,6 +1,7 @@
 {
   "name": "game-studios-plugin",
   "owner": { "name": "HunLuanZhiZhu" },
+  "description": "Game Studios framework for game projects: 70+ workflow skills, guarded hooks, 2 MCP servers — one plugin, installable from this marketplace",
   "plugins": [
     {
       "name": "game-studios",

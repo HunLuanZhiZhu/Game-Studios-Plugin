@@ -2,5 +2,7 @@
   "name": "game-studios",
   "description": "Game development studio framework: 70+ workflow skills, guarded automation hooks, and 2 bundled MCP servers, packaged as one plugin",
   "version": "0.1.0",
-  "author": { "name": "HunLuanZhiZhu" }
+  "author": { "name": "HunLuanZhiZhu" },
+  "homepage": "https://github.com/HunLuanZhiZhu/Game-Studios-Plugin",
+  "repository": "https://github.com/HunLuanZhiZhu/Game-Studios-Plugin"
 }
