@@ -19,7 +19,7 @@ require), so behavior is identical on every host and every run.
 | Workspace path | Source | Why |
 |---|---|---|
 | `.studio/technical-preferences.md` | plugin `docs/technical-preferences.md` | Per-project config with `[TO BE CONFIGURED]` placeholders; filled by `/game-studios:setup-engine`; **marker file that activates all hooks** |
-| `.zcode/settings.json` + `.claude/settings.json` (dual-written) + `.studio/statusline.sh` | skill assets | Host plumbing for ZCode and Claude Code: permission guardrails + production-stage status line (statusline script lives in the neutral `.studio/` dir) |
+| `.claude/settings.json` + `.studio/statusline.sh` | skill assets | Host plumbing for Claude Code: permission guardrails + production-stage status line (statusline script lives in the neutral `.studio/` dir). ZCode reads no project-level settings file, so none is written for it |
 | `.claude/rules/` (11 files) | plugin `rules/` | Path-scoped coding standards, auto-enforced by Claude Code (verified). Other hosts: reference-only via the plugin copy (`${CLAUDE_PLUGIN_ROOT}/rules/`) — no third copy is seeded |
 | `.codex/agents/` (51 files) | plugin `codex/agents/` | Codex-format subagents (TOML, `developer_instructions`) generated from `agents/*.md` by `codex/build_agents.sh`. Codex plugins cannot bundle subagents, so the workspace copy is the delivery mechanism (loaded only in trusted projects) |
 | `CLAUDE.md` | skill asset template | **Standalone** Claude Code entry (collaboration protocol, stack placeholders, `@.studio/technical-preferences.md`) — not an `@AGENTS.md` shell. Created if missing; if present, only its managed anchor block is refreshed |

@@ -98,7 +98,7 @@ Idempotent, cross-platform (bash + awk), and never overwrites existing files.
 | Path | Purpose |
 |---|---|
 | `.claude/rules/` | 11 path-scoped coding standards — auto-enforced by Claude Code |
-| `.claude/settings.json` + `.zcode/settings.json` | Host settings: permission guardrails + status line (dual-written) |
+| `.claude/settings.json` | Host settings for Claude Code: permission guardrails + status line (ZCode reads no project settings file, so none is written for it) |
 | `.studio/technical-preferences.md` | Per-project tech config; filled by `/setup-engine`; also the **hooks activation marker** |
 | `.studio/statusline.sh` | Production-stage status line |
 | `AGENTS.md` / `CLAUDE.md` | Standalone entry files for ZCode / Claude Code, each carrying the collaboration protocol and the anti-compression anchor |
@@ -141,10 +141,12 @@ Game-Studios-Plugin/
 
 | Capability | Claude Code | ZCode | Codex |
 |---|---|---|---|
-| Skills & agents | ✅ `game-studios:<skill>` | ✅ | ✅ skills native; agents via `.codex/agents/` seeds |
-| Hooks — guards, context, audit | ✅ full set | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
+| Skills | ✅ `game-studios:<skill>` | ✅ | ✅ native (same SKILL.md format) |
+| Agents (subagents) | ✅ `agents/*.md` | ✅ | ⚠️ not plugin-bundled — seeded as `.codex/agents/*.toml` by init |
+| Hooks | ✅ full set | ✅ supported subset | ⚠️ documented support (`hooks/hooks.json` same shape) — untested; commands depend on the plugin-root env var, review via `/hooks`, `bash` on PATH |
 | Rules | ✅ native (`.claude/rules/`, verified auto-enforcement) | ✅ via `AGENTS.md` | ✅ via `AGENTS.md` |
-| Status line (init-seeded `statusline.sh`) | ✅ | ✅ | ❌ n/a |
+| Status line (init-seeded `statusline.sh`) | ✅ via `.claude/settings.json` | ❌ no project settings file | ❌ n/a |
+| MCP servers | ✅ `.mcp.json` | ✅ plugin `mcpServers` | ✅ `mcp.json` |
 
 ## 🧭 Path conventions
 

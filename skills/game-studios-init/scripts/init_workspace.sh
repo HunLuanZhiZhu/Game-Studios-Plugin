@@ -272,7 +272,9 @@ copy_file "$PLUGIN_ROOT/docs/registry/architecture.yaml" "docs/registry/architec
 copy_file "$PLUGIN_ROOT/docs/architecture/tr-registry.yaml" "docs/architecture/tr-registry.yaml"
 copy_tree "$PLUGIN_ROOT/rules" ".claude/rules"
 copy_tree "$PLUGIN_ROOT/codex/agents" ".codex/agents"
-copy_file "$ASSETS/settings.json" ".zcode/settings.json"
+# .claude/settings.json only: verified to be read by Claude Code. ZCode does
+# NOT read a project-level .zcode/settings.json (verified against the desktop
+# app binary), so writing one would be dead weight.
 copy_file "$ASSETS/settings.json" ".claude/settings.json"
 copy_file "$ASSETS/statusline.sh" ".studio/statusline.sh"
 ensure_agents_md
