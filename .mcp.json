@@ -10,7 +10,7 @@
         "9876"
       ]
     },
-    "open-design": {
+    "open-design-windows": {
       "type": "stdio",
       "command": "bash",
       "args": [

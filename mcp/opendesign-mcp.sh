@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# opendesign-mcp.sh — relocatable stdio launcher for the Open Design MCP daemon.
+# opendesign-mcp.sh — relocatable stdio launcher for the Open Design MCP
+# daemon — **WINDOWS ONLY** (auto-discovery uses the Windows registry and
+# Windows named pipes). On macOS/Linux, configure the MCP server manually
+# following the app's own agent-integration instructions — see
+# https://open-design.ai (the app can generate its MCP registration for you).
 #
 # Why this exists: the Open Design desktop app ships an MCP daemon, but its
 # stock MCP registration hardcodes machine-specific paths AND a named pipe
@@ -22,9 +26,9 @@ set -u
 
 die() { echo "opendesign-mcp: $*" >&2; exit 1; }
 
-[ "$(uname -s 2>/dev/null)" = MINGW"*" ] || case "$(uname -s 2>/dev/null)" in
+case "$(uname -s 2>/dev/null)" in
   MINGW*|MSYS*|CYGWIN*) ;;
-  *) die "Open Design desktop app is Windows-only at present" ;;
+  *) die "auto-discovery is Windows-only (registry + named pipes). On macOS/Linux, configure the open-design MCP server manually — the app can generate its registration for you; see https://open-design.ai" ;;
 esac
 
 p() { # Windows path -> POSIX path (Git Bash)
@@ -44,7 +48,7 @@ if [ -z "$OD_INSTALL" ] && [ -n "${LOCALAPPDATA:-}" ]; then
   cand="$(p "$LOCALAPPDATA")/Programs/Open Design"
   [ -f "$cand/Open Design.exe" ] && OD_INSTALL="$cand"
 fi
-[ -n "$OD_INSTALL" ] || die "Open Design is not installed; install the desktop app from https://opendesign.dev first"
+[ -n "$OD_INSTALL" ] || die "Open Design is not installed; get the desktop app from https://open-design.ai/download (Windows auto-discovery only — other hosts: configure the MCP manually per https://open-design.ai)"
 
 OD_EXE="$OD_INSTALL/Open Design.exe"
 OD_CLI="$OD_INSTALL/resources/app/prebundled/daemon/daemon-cli.mjs"
@@ -57,8 +61,7 @@ if [ -z "$PIPE" ]; then
   # enumerate live pipes; MSYS cannot list \\.\pipe\ — use the Electron binary
   # itself as node (ELECTRON_RUN_AS_NODE) to readdir the pipe filesystem
   pipes="$(ELECTRON_RUN_AS_NODE=1 "$OD_EXE" -e "console.log(require('fs').readdirSync('\\\\\\\\.\\\\pipe\\\\').filter(function(f){return f.indexOf('open-design-sidecar')===0}).join('\n'))" 2>/dev/null || true)"
-  [ -n "$pipes" ] || die "no live Open Design sidecar pipe — start the Open Design desktop app first, then retry"
-  # handshake-probe each candidate (initialize round-trip); first responder wins
+  [ -n "$pipes" ] || die "no live Open Design sidecar pipe — start the Open Design desktop app first, then retry"  # handshake-probe each candidate (initialize round-trip); first responder wins
   probe_req='{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"opendesign-mcp-probe","version":"0"}}}'
   for cand in $pipes; do
     if printf '%s\n' "$probe_req" | timeout 15 env ELECTRON_RUN_AS_NODE=1 "$OD_EXE" "$OD_CLI" mcp --daemon-url "$cand" >/dev/null 2>&1; then

@@ -124,13 +124,17 @@ Game-Studios-Plugin/
 ```
 
 > [!NOTE]
-> The bundled `.mcp.json` registers two MCP servers for the asset pipeline:
+> The bundled `.mcp.json` registers two optional MCP servers for the asset
+> pipeline. Neither is required — the framework core works without them:
 > - **blender** (`blender-mcp` → `localhost:9876`) — requires `blender-mcp` on
 >   your PATH and Blender running with its MCP addon enabled.
-> - **open-design** (`mcp/opendesign-mcp.sh`) — a relocatable launcher for the
->   [Open Design](https://opendesign.dev) desktop app's MCP daemon: it resolves
->   the install path and the live sidecar pipe at startup (no hardcoded paths),
->   so only the app needs to be running.
+> - **open-design-windows** (`mcp/opendesign-mcp.sh`) — a relocatable launcher
+>   for the [Open Design](https://open-design.ai) desktop app's MCP daemon. It
+>   resolves the install path and the live sidecar pipe at startup (no
+>   hardcoded paths). **Windows only** — auto-discovery uses the Windows
+>   registry and named pipes; on macOS/Linux configure the open-design MCP
+>   server manually (the app can generate its registration) — see
+>   https://open-design.ai .
 > Otherwise the servers simply stay disconnected and everything else works.
 
 ## 🖥 Host compatibility

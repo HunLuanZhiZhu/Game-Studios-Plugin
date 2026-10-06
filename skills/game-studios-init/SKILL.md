@@ -48,9 +48,12 @@ require), so behavior is identical on every host and every run.
 5. **Verify**: the script prints `[created]`/`[skipped]`/`[updated]` per path
    and the hooks-marker status. Confirm `AGENTS.md` and `CLAUDE.md` contain both
    `<!-- GAME-STUDIOS:BEGIN -->` and `<!-- GAME-STUDIOS:END -->`.
-6. **Environment inventory.** Run
+6. **Environment inventory (optional functional extension).** Run
    `bash <skill-dir>/scripts/env_inventory.sh` (add `--no-launch` to keep it
-   strictly read-only) and walk the user through the three sections:
+   strictly read-only) and walk the user through the four sections. These
+   checks only enrich the setup — the workspace core (scaffold, rules,
+   registries, hooks marker) is fully functional without any of them; skip
+   freely if the user is not interested.
    - **Game engines** — detects Godot / Unity / Unreal (PATH, program
      directories, drive-root scan, registry). If none are found, recommend
      https://godotengine.org/download (free, open source).
@@ -66,11 +69,15 @@ require), so behavior is identical on every host and every run.
      are actually registered (server API on port 8188 when running, otherwise
      the registered model roots). image21 needs one file per type; pixal3d
      needs all 8.
-   - **Open Design** — locates the desktop app (registry `InstallLocation`)
-     and reports whether its sidecar pipe is live. The plugin's `open-design`
-     MCP server resolves everything at runtime via `mcp/opendesign-mcp.sh`
-     (install dir + a live `open-design-sidecar-*` pipe), so no manual MCP
-     configuration is needed — only the app must be running.
+   - **Open Design** (Windows only) — locates the desktop app (registry
+     `InstallLocation`) and reports whether its sidecar pipe is live. The
+     plugin's `open-design-windows` MCP server resolves everything at runtime
+     via `mcp/opendesign-mcp.sh` (install dir + a live `open-design-sidecar-*`
+     pipe) — **Windows only: auto-discovery uses the Windows registry and
+     Windows named pipes.** On macOS/Linux this server is not provided
+     automatically; tell the user to configure the open-design MCP server
+     manually instead (the app can generate its MCP registration) — official
+     site and downloads: https://open-design.ai .
 7. **Next steps**: `/game-studios:setup-engine` (engine choice) or the full
    onboarding flow (`game-studios:start`).
 

@@ -71,8 +71,10 @@ port_open() {
 }
 
 # ── 4. Open Design (design MCP) — defined here, called from the main flow ─
+# Windows-only auto-discovery (registry + named pipes); other hosts: the user
+# configures the open-design MCP manually per https://open-design.ai
 run_opendesign() {
-  hdr "4. Open Design / MCP"
+  hdr "4. Open Design / MCP (Windows-only auto-discovery)"
   od_install=""
   if [ "$HOST_OS" = windows ] && command -v reg >/dev/null 2>&1; then
     for hive in 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Open Design-release-stable-win' \
@@ -86,15 +88,19 @@ run_opendesign() {
     [ -f "$cand/Open Design.exe" ] && od_install="$cand"
   fi
   if [ -z "$od_install" ]; then
-    bad "Open Design desktop app not detected (optional design MCP; ignored)"
+    if [ "$HOST_OS" = windows ]; then
+      bad "Open Design desktop app not detected (optional design MCP; ignored)"
+    else
+      bad "Open Design auto-discovery not supported on this OS — configure the open-design MCP manually per https://open-design.ai (optional)"
+    fi
     return 0
   fi
   ok "Open Design installed: $od_install"
   od_pipes="$(ELECTRON_RUN_AS_NODE=1 "$od_install/Open Design.exe" -e "console.log(require('fs').readdirSync('\\\\\\\\.\\\\pipe\\\\').filter(function(f){return f.indexOf('open-design-sidecar')===0}).length)" 2>/dev/null | tr -d '\r')"
   if [ "${od_pipes:-0}" -gt 0 ] 2>/dev/null; then
-    ok "sidecar live ($od_pipes pipe(s)) — MCP usable via the plugin's open-design server"
+    ok "sidecar live ($od_pipes pipe(s)) — MCP usable via the plugin's open-design-windows server"
   else
-    warn "Open Design is not running — start it to enable its MCP (the plugin's open-design server discovers the pipe automatically)"
+    warn "Open Design is not running — start it to enable its MCP (the plugin's open-design-windows server discovers the pipe automatically)"
   fi
   return 0
 }
