@@ -19,7 +19,7 @@
 > [!IMPORTANT]
 > Derived from **[Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)** by Donchitos — MIT, attribution preserved.  
 > Development home & first dogfood workspace: **[ZCode-Game-Studios](https://github.com/HunLuanZhiZhu/ZCode-Game-Studios)**.  
-> Host-neutral: built on the Claude Code plugin spec — **Claude Code**, **Codex**, and similar-behavior coding agents (**ZCode** included) are first-class hosts.
+> Host-neutral: built on the Claude Code plugin spec — **Claude Code**, **Codex**, and similar-behavior coding agents (**ZCode**, **OpenCode**) are first-class hosts.
 
 ---
 
@@ -41,8 +41,8 @@ The full lifecycle: concept → design → development → QA → release. Inclu
 </td>
 <td width="25%" valign="top">
 
-### 🛡 Guarded Hooks
-Session context injection, dangerous-command guards, commit/push validation, asset checks, and an agent audit trail. All self-contained via `${CLAUDE_PLUGIN_ROOT}` — zero configuration. Two MCP servers ship bundled (relocated at runtime, no hardcoded paths).
+### 🛡 Hooks & MCP Servers
+Session context injection, dangerous-command guards, commit/push validation, asset checks, and an agent audit trail — all self-contained via `${CLAUDE_PLUGIN_ROOT}`, zero configuration. Two MCP servers ship bundled in the same plugin (install path and endpoint resolved at runtime — no hardcoded paths, see the MCP note below).
 
 </td>
 <td width="25%" valign="top">
@@ -139,12 +139,12 @@ Game-Studios-Plugin/
 
 ## 🖥 Host compatibility
 
-| Capability | Claude Code | ZCode | Codex |
-|---|---|---|---|
-| Skills & agents | ✅ `game-studios:<skill>` | ✅ | ✅ skills native; agents via `.codex/agents/` seeds |
-| Hooks — guards, context, audit | ✅ full set | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
-| Rules (`.claude/rules/`) | ✅ verified auto-enforcement | ⚠️ imported via `AGENTS.md` | ❌ referenced from `AGENTS.md` (no native path-scoped rules) |
-| Status line | ✅ | ✅ | ❌ n/a |
+| Capability | Claude Code | ZCode | OpenCode | Codex |
+|---|---|---|---|---|
+| Skills & agents | ✅ `game-studios:<skill>` | ✅ | ✅ | ✅ skills native; agents via `.codex/agents/` seeds |
+| Hooks — guards, context, audit | ✅ full set | ✅ supported subset | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
+| Rules (`.claude/rules/`) | ✅ verified auto-enforcement | ✅ native | ✅ native | ❌ referenced from `AGENTS.md` (no native path-scoped rules) |
+| Status line | ✅ | ✅ | ❌ n/a | ❌ n/a |
 
 ## 🧭 Path conventions
 
@@ -166,9 +166,10 @@ Per-project paths stay workspace-relative on purpose: `src/`, `design/`,
 - [x] `game-studios-init` — idempotent cross-platform workspace scaffolder
 - [x] Codex adaptation: portable `plugin.json`/`mcp.json`, agents converted to
       `.codex/agents/*.toml`, shared `hooks/hooks.json`
-- [ ] Host verification: plugin discovery (incl. `source: "./"` self-reference),
-      skills/agents namespaces, `${CLAUDE_PLUGIN_ROOT}` expansion in SKILL.md bodies
-- [ ] Clean-room E2E install test (Claude Code / ZCode / Codex)
+- [x] Host verification: ZCode desktop install verified (manual install; skills
+      and hooks live, plugin cache at
+      `~/.zcode/cli/plugins/cache/<marketplace>/<plugin>/<version>/`)
+- [ ] Clean-room E2E install test (Claude Code / Codex)
 - [ ] CI packaging & versioned releases
 
 ## 📄 License & attribution
