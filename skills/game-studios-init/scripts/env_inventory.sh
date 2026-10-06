@@ -1,7 +1,12 @@
 #!/bin/sh
 # env_inventory.sh — machine environment inventory for game-studios-init.
 #
-# Run with bash:  bash "$SKILL_DIR/scripts/env_inventory.sh" [--no-launch]
+# Run with bash:  bash "$SKILL_DIR/scripts/env_inventory.sh" [--no-launch] [WORKSPACE_DIR]
+#
+# WORKSPACE_DIR (default: current directory) anchors the "workspace-nearby"
+# scans: the directory itself, its parent, and its grandparent are scanned
+# IN ADDITION to the drive roots (deeper, and catches installs that live next
+# to the project — e.g. a portable Godot checkout kept in ../godot/).
 #
 # Read-only diagnostic EXCEPT one action: if Blender is installed but not
 # running it is launched (the MCP addon socket only exists while Blender is
@@ -21,7 +26,18 @@
 set -u
 
 NO_LAUNCH=0
-[ "${1:-}" = "--no-launch" ] && NO_LAUNCH=1
+WS=""
+for arg in "$@"; do
+  case "$arg" in
+    --no-launch) NO_LAUNCH=1 ;;
+    -h|--help) sed -n '2,12p' "$0" | sed 's/^# \?//'; exit 0 ;;
+    *) if [ -z "$WS" ]; then WS="$arg"; else printf 'error: unexpected argument: %s\n' "$arg" >&2; exit 1; fi ;;
+  esac
+done
+if ! WS="$(cd "${WS:-$PWD}" 2>/dev/null && pwd)"; then
+  printf 'warning: workspace dir not found, using current directory\n' >&2
+  WS="$PWD"
+fi
 
 OS=$(uname -s 2>/dev/null || echo unknown)
 case "$OS" in
@@ -67,6 +83,11 @@ check_godot() {
     for base in "$(p "${LOCALAPPDATA:-}/Programs")" "$(p "${PROGRAMFILES:-}")"; do
       [ -d "$base" ] && candidates="$candidates $(find "$base" -maxdepth 2 -iname 'Godot*.exe' 2>/dev/null)"
     done
+    # workspace-nearby first (deeper than the drive scan reaches)
+    for wsd in "$WS" "$WS/.." "$WS/../.."; do
+      [ -d "$wsd" ] || continue
+      candidates="$candidates $(find "$wsd" -maxdepth 4 \( -iname Windows -o -iname 'Windows.old' -o -iname Users -o -iname node_modules \) -prune -o -iname 'Godot*.exe' -print 2>/dev/null)"
+    done
     # portable installs live anywhere — scan drive roots (pruned, depth 4)
     for d in $(for L in c d e f g h i j k l m n o p q r s t u v w x y z; do [ -d "/$L" ] && printf '/%s ' "$L"; done); do
       candidates="$candidates $(find "$d" -maxdepth 4 \( -iname Windows -o -iname 'Windows.old' -o -iname Users \) -prune -o -iname 'Godot*.exe' -print 2>/dev/null)"
@@ -80,6 +101,7 @@ check_godot() {
     found="$c"; break
   done
   [ -n "$found" ] || return 1
+  found="$(cd "$(dirname "$found")" 2>/dev/null && pwd)/$(basename "$found")"
   # prefer the console wrapper for a clean --version read on Windows
   ver_exe="$found"
   case "$found" in
@@ -270,7 +292,7 @@ if [ -z "$comfy_install" ] && [ "$HOST_OS" = windows ]; then
 fi
 if [ -z "$comfy_install" ]; then
   # shallow scan of drive roots + program dirs for *omfy* (per skill convention)
-  scan_dirs="/opt $HOME $(p "${LOCALAPPDATA:-}/Programs") $(p "${PROGRAMFILES:-}")"
+  scan_dirs="/opt $HOME $WS $WS/.. $WS/../.. $(p "${LOCALAPPDATA:-}/Programs") $(p "${PROGRAMFILES:-}")"
   if [ "$HOST_OS" = windows ]; then
     for L in c d e f g h i j k l m n o p q r s t u v w x y z; do [ -d "/$L" ] && scan_dirs="$scan_dirs /$L"; done
   fi
