@@ -143,7 +143,7 @@ Game-Studios-Plugin/
 |---|---|---|---|
 | Skills | ✅ `game-studios:<skill>` | ✅ | ✅ native (same SKILL.md format) |
 | Agents (subagents) | ✅ `agents/*.md` | ✅ | ⚠️ not plugin-bundled — seeded as `.codex/agents/*.toml` by init |
-| Hooks | ✅ full set | ✅ supported subset | ⚠️ documented support (`hooks/hooks.json` same shape) — untested; commands depend on the plugin-root env var, review via `/hooks`, `bash` on PATH |
+| Hooks | ✅ full set | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
 | Rules | ✅ native (`.claude/rules/`, verified auto-enforcement) | ✅ via `AGENTS.md` | ✅ via `AGENTS.md` |
 | Status line (init-seeded `statusline.sh`) | ✅ via `.claude/settings.json` | ❌ no project settings file | ❌ n/a |
 | MCP servers | ✅ `.mcp.json` | ✅ plugin `mcpServers` | ✅ `mcp.json` |
