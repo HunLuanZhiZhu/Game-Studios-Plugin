@@ -54,14 +54,21 @@ Session context injection, dangerous-command guards, commit/push validation, ass
 </tr>
 </table>
 
-## 🚀 Install
+## 🚀 Install (Claude Code)
 
-In your game project workspace:
+Requires [Claude Code](https://claude.com/claude-code) with plugin support. In your game project workspace, run:
 
+```bash
+# 1. Register this repo as a plugin marketplace
+claude plugin marketplace add HunLuanZhiZhu/Game-Studios-Plugin
+
+# 2. Install the plugin from it
+claude plugin install game-studios@game-studios-plugin
 ```
-/plugin marketplace add <path-to-Game-Studios-Plugin>
-/plugin install game-studios@game-studios-plugin
-```
+
+(Inside a running Claude Code session, the same steps are `/plugin marketplace add HunLuanZhiZhu/Game-Studios-Plugin` and `/plugin install game-studios@game-studios-plugin`.)
+
+After installation:
 
 1. **Restart the session** — hook configuration is snapshotted at session start.
 2. **Run `/game-studios-init`** — scaffolds the workspace (see below).
