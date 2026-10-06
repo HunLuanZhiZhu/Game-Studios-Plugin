@@ -1,6 +1,6 @@
 {
   "name": "game-studios",
-  "description": "Multi-agent game development studio: 50+ specialist agents, 70+ workflow skills, and guarded automation hooks, packaged as one plugin",
+  "description": "Game development studio framework: 70+ workflow skills, guarded automation hooks, and 2 bundled MCP servers, packaged as one plugin",
   "version": "0.1.0",
   "author": { "name": "HunLuanZhiZhu" }
 }

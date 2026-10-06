@@ -2,7 +2,7 @@
 
 # 🎮 Game Studios Plugin
 
-**The entire Game Studios multi-agent game-development framework — packaged as one Claude Code plugin.**
+**The entire Game Studios game-development framework — 70+ workflow skills, guarded hooks, and 2 bundled MCP servers — packaged as one plugin.**
 
 <a href="./READMEch.md"><img src="https://img.shields.io/badge/中文文档-READMEch.md-2563EB?style=for-the-badge" alt="Chinese README"/></a>
 <a href="https://github.com/HunLuanZhiZhu/ZCode-Game-Studios"><img src="https://img.shields.io/badge/Dev_Home-ZCode_Game_Studios-181717?style=for-the-badge&logo=github" alt="Dev home"/></a>
@@ -11,7 +11,7 @@
 <br/>
 
 <img src="https://img.shields.io/badge/Plugin-game--studios-2563EB?style=for-the-badge" alt="Plugin name"/>
-<img src="https://img.shields.io/badge/Hosts-Claude_Code_·_ZCode-7C3AED?style=for-the-badge" alt="Hosts"/>
+<img src="https://img.shields.io/badge/Hosts-Claude_Code_·_Codex_·_ZCode-7C3AED?style=for-the-badge" alt="Hosts"/>
 <img src="https://img.shields.io/badge/License-MIT-3DA639?style=for-the-badge" alt="MIT License"/>
 
 </div>
@@ -19,7 +19,7 @@
 > [!IMPORTANT]
 > Derived from **[Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)** by Donchitos — MIT, attribution preserved.  
 > Development home & first dogfood workspace: **[ZCode-Game-Studios](https://github.com/HunLuanZhiZhu/ZCode-Game-Studios)**.  
-> Host-neutral: built on the Claude Code plugin spec — **Claude Code** and **ZCode** are both first-class hosts.
+> Host-neutral: built on the Claude Code plugin spec — **Claude Code**, **Codex**, and similar-behavior coding agents (**ZCode** included) are first-class hosts.
 
 ---
 
@@ -42,7 +42,7 @@ The full lifecycle: concept → design → development → QA → release. Inclu
 <td width="25%" valign="top">
 
 ### 🛡 Guarded Hooks
-Session context injection, dangerous-command guards, commit/push validation, asset checks, and an agent audit trail. All self-contained via `${CLAUDE_PLUGIN_ROOT}` — zero configuration.
+Session context injection, dangerous-command guards, commit/push validation, asset checks, and an agent audit trail. All self-contained via `${CLAUDE_PLUGIN_ROOT}` — zero configuration. Two MCP servers ship bundled (relocated at runtime, no hardcoded paths).
 
 </td>
 <td width="25%" valign="top">

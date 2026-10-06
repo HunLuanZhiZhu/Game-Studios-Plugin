@@ -2,9 +2,9 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "game-studios",
   "version": "0.1.0",
-  "description": "Multi-agent game development studio: 70+ workflow skills and guarded automation hooks, packaged as one portable plugin (Claude Code, ZCode, Codex)",
+  "description": "Game development studio framework: 70+ workflow skills, guarded automation hooks, and 2 bundled MCP servers — one portable plugin for Claude Code, Codex, and similar hosts",
   "author": { "name": "HunLuanZhiZhu" },
   "repository": "https://github.com/HunLuanZhiZhu/Game-Studios-Plugin",
   "license": "MIT",
-  "keywords": ["game-development", "godot", "unity", "unreal", "multi-agent"]
+  "keywords": ["game-development", "godot", "unity", "unreal", "workflow"]
 }

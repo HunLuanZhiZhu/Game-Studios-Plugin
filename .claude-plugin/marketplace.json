@@ -4,7 +4,7 @@
   "plugins": [
     {
       "name": "game-studios",
-      "description": "Game Studios multi-agent framework: agents, skills, hooks — one plugin",
+      "description": "Game Studios framework: 70+ workflow skills, guarded hooks, 2 MCP servers — one plugin",
       "source": "./"
     }
   ]
