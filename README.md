@@ -74,6 +74,23 @@ After installation:
 2. **Run `/game-studios-init`** — scaffolds the workspace (see below).
 3. **Run `/game-studios:setup-engine`** — pick your engine; this also activates the hooks.
 
+### Codex
+
+The same repo installs into [Codex](https://developers.openai.com/codex) as a portable plugin (root `plugin.json`, Agent Plugins schema 1.0.0):
+
+```bash
+# register the repo as a marketplace
+codex plugin marketplace add HunLuanZhiZhu/Game-Studios-Plugin
+```
+
+Then inside a Codex session, run `/plugins` and install/toggle **game-studios** in the plugin browser. Note that Codex skips plugin hooks until they are reviewed via `/hooks`.
+
+Codex specifics: skills and hooks are consumed natively; **subagents are not a plugin-bundled component in Codex**, so `/game-studios-init` seeds the 51 agents as `.codex/agents/*.toml` (converted from the Claude format, loaded in trusted projects). Path-scoped rules have no native Codex equivalent — the workspace `AGENTS.md` references them.
+
+### ZCode
+
+ZCode (desktop) installs plugins manually through its UI — point it at this repo, then run `/game-studios-init` in the project workspace.
+
 ## 🏗 What `game-studios-init` scaffolds
 
 Idempotent, cross-platform (bash + awk), and never overwrites existing files.
@@ -92,11 +109,14 @@ Idempotent, cross-platform (bash + awk), and never overwrites existing files.
 
 ```
 Game-Studios-Plugin/
-├── .claude-plugin/plugin.json     # Plugin manifest (name: game-studios)
+├── plugin.json                    # Portable manifest (Agent Plugins schema — Codex)
+├── mcp.json                       # Portable MCP declaration (Codex)
+├── .claude-plugin/plugin.json     # Claude Code manifest (name: game-studios)
 ├── .claude-plugin/marketplace.json
-├── agents/                        # 50+ specialist agents
+├── agents/                        # 50+ specialist agents (Claude/ZCode format)
+├── codex/agents/                  # the same agents as Codex TOML (generated)
 ├── skills/                        # 70+ workflow skills
-├── hooks/                         # hooks.json + guarded scripts
+├── hooks/                         # hooks.json + guarded scripts (shared by CC & Codex)
 ├── rules/                         # 11 path-scoped coding standards (seed source)
 ├── docs/                          # Framework docs, templates, engine references
 ├── .mcp.json                      # Blender MCP server (3D asset pipeline)
@@ -111,12 +131,12 @@ Game-Studios-Plugin/
 
 ## 🖥 Host compatibility
 
-| Capability | Claude Code | ZCode |
-|---|---|---|
-| Skills & agents | ✅ `game-studios:<skill>` | ✅ |
-| Hooks — guards, context, audit | ✅ full set | ✅ supported subset |
-| Rules (`.claude/rules/`) | ✅ verified auto-enforcement | ⚠️ n/a — standards are imported via `AGENTS.md` instead |
-| Status line | ✅ | ✅ |
+| Capability | Claude Code | ZCode | Codex |
+|---|---|---|---|
+| Skills & agents | ✅ `game-studios:<skill>` | ✅ | ✅ skills native; agents via `.codex/agents/` seeds |
+| Hooks — guards, context, audit | ✅ full set | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
+| Rules (`.claude/rules/`) | ✅ verified auto-enforcement | ⚠️ imported via `AGENTS.md` | ❌ referenced from `AGENTS.md` (no native path-scoped rules) |
+| Status line | ✅ | ✅ | ❌ n/a |
 
 ## 🧭 Path conventions
 
@@ -136,9 +156,11 @@ Per-project paths stay workspace-relative on purpose: `src/`, `design/`,
 - [x] Single-plugin architecture: agents, skills, hooks, rules, docs
 - [x] Reference remap: framework paths use `${CLAUDE_PLUGIN_ROOT}`
 - [x] `game-studios-init` — idempotent cross-platform workspace scaffolder
+- [x] Codex adaptation: portable `plugin.json`/`mcp.json`, agents converted to
+      `.codex/agents/*.toml`, shared `hooks/hooks.json`
 - [ ] Host verification: plugin discovery (incl. `source: "./"` self-reference),
       skills/agents namespaces, `${CLAUDE_PLUGIN_ROOT}` expansion in SKILL.md bodies
-- [ ] Clean-room E2E install test
+- [ ] Clean-room E2E install test (Claude Code / ZCode / Codex)
 - [ ] CI packaging & versioned releases
 
 ## 📄 License & attribution

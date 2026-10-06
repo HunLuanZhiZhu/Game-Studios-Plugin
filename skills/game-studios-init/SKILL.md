@@ -21,6 +21,7 @@ require), so behavior is identical on every host and every run.
 | `.studio/technical-preferences.md` | plugin `docs/technical-preferences.md` | Per-project config with `[TO BE CONFIGURED]` placeholders; filled by `/game-studios:setup-engine`; **marker file that activates all hooks** |
 | `.zcode/settings.json` + `.claude/settings.json` (dual-written) + `.studio/statusline.sh` | skill assets | Host plumbing for ZCode and Claude Code: permission guardrails + production-stage status line (statusline script lives in the neutral `.studio/` dir) |
 | `.claude/rules/` (11 files) | plugin `rules/` | Path-scoped coding standards, auto-enforced by Claude Code (verified). Other hosts: reference-only via the plugin copy (`${CLAUDE_PLUGIN_ROOT}/rules/`) — no third copy is seeded |
+| `.codex/agents/` (51 files) | plugin `codex/agents/` | Codex-format subagents (TOML, `developer_instructions`) generated from `agents/*.md` by `codex/build_agents.sh`. Codex plugins cannot bundle subagents, so the workspace copy is the delivery mechanism (loaded only in trusted projects) |
 | `CLAUDE.md` | skill asset template | Claude Code entry point (`@AGENTS.md`), created only if missing |
 | `docs/registry/architecture.yaml` | plugin `docs/registry/architecture.yaml` | Empty scaffold; `/game-studios:architecture-decision` appends with user approval |
 | `docs/architecture/tr-registry.yaml` | plugin `docs/architecture/tr-registry.yaml` | Empty scaffold; keeps TR-IDs stable across runs |
