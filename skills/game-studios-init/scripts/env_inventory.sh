@@ -70,6 +70,35 @@ port_open() {
   return 1
 }
 
+# ── 4. Open Design (design MCP) — defined here, called from the main flow ─
+run_opendesign() {
+  hdr "4. Open Design / MCP"
+  od_install=""
+  if [ "$HOST_OS" = windows ] && command -v reg >/dev/null 2>&1; then
+    for hive in 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Open Design-release-stable-win' \
+                'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Open Design-release-stable-win'; do
+      loc="$(MSYS_NO_PATHCONV=1 reg query "$hive" /v InstallLocation 2>/dev/null | grep REG_SZ | sed 's/.*REG_SZ *//' | tr -d '\r')"
+      if [ -n "$loc" ] && [ -f "$(p "$loc")/Open Design.exe" ]; then od_install="$(p "$loc")"; break; fi
+    done
+  fi
+  if [ -z "$od_install" ] && [ "$HOST_OS" = windows ] && [ -n "${LOCALAPPDATA:-}" ]; then
+    cand="$(p "$LOCALAPPDATA")/Programs/Open Design"
+    [ -f "$cand/Open Design.exe" ] && od_install="$cand"
+  fi
+  if [ -z "$od_install" ]; then
+    bad "Open Design desktop app not detected (optional design MCP; ignored)"
+    return 0
+  fi
+  ok "Open Design installed: $od_install"
+  od_pipes="$(ELECTRON_RUN_AS_NODE=1 "$od_install/Open Design.exe" -e "console.log(require('fs').readdirSync('\\\\\\\\.\\\\pipe\\\\').filter(function(f){return f.indexOf('open-design-sidecar')===0}).length)" 2>/dev/null | tr -d '\r')"
+  if [ "${od_pipes:-0}" -gt 0 ] 2>/dev/null; then
+    ok "sidecar live ($od_pipes pipe(s)) — MCP usable via the plugin's open-design server"
+  else
+    warn "Open Design is not running — start it to enable its MCP (the plugin's open-design server discovers the pipe automatically)"
+  fi
+  return 0
+}
+
 # ── 1. Game engines ───────────────────────────────────────────────────────
 FOUND_ENGINE=""
 
@@ -312,6 +341,7 @@ fi
 
 if [ -z "$comfy_install" ]; then
   bad "ComfyUI not detected on this machine (skipping model inventory)"
+  run_opendesign
   say ""
   say "Inventory finished."
   exit 0
@@ -369,6 +399,8 @@ $MODELS_EXPECTED
 EOF
 say ""
 ind "image21 set complete: $((img21_diff + img21_te + img21_vae))/3 (diffusion=$img21_diff text_encoder=$img21_te vae=$img21_vae) — 3/3 means text-to-image works"
+
+run_opendesign
 
 say ""
 say "Inventory finished."

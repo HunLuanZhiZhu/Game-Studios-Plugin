@@ -124,10 +124,14 @@ Game-Studios-Plugin/
 ```
 
 > [!NOTE]
-> The bundled `.mcp.json` registers the **Blender MCP server** (`blender-mcp` →
-> `localhost:9876`) used by the 3D asset pipeline. It requires `blender-mcp`
-> installed on your PATH and Blender running with its MCP addon enabled —
-> otherwise the server simply stays disconnected and everything else works.
+> The bundled `.mcp.json` registers two MCP servers for the asset pipeline:
+> - **blender** (`blender-mcp` → `localhost:9876`) — requires `blender-mcp` on
+>   your PATH and Blender running with its MCP addon enabled.
+> - **open-design** (`mcp/opendesign-mcp.sh`) — a relocatable launcher for the
+>   [Open Design](https://opendesign.dev) desktop app's MCP daemon: it resolves
+>   the install path and the live sidecar pipe at startup (no hardcoded paths),
+>   so only the app needs to be running.
+> Otherwise the servers simply stay disconnected and everything else works.
 
 ## 🖥 Host compatibility
 

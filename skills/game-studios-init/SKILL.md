@@ -66,6 +66,11 @@ require), so behavior is identical on every host and every run.
      are actually registered (server API on port 8188 when running, otherwise
      the registered model roots). image21 needs one file per type; pixal3d
      needs all 8.
+   - **Open Design** — locates the desktop app (registry `InstallLocation`)
+     and reports whether its sidecar pipe is live. The plugin's `open-design`
+     MCP server resolves everything at runtime via `mcp/opendesign-mcp.sh`
+     (install dir + a live `open-design-sidecar-*` pipe), so no manual MCP
+     configuration is needed — only the app must be running.
 7. **Next steps**: `/game-studios:setup-engine` (engine choice) or the full
    onboarding flow (`game-studios:start`).
 

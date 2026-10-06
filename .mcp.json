@@ -9,6 +9,13 @@
         "--port",
         "9876"
       ]
+    },
+    "open-design": {
+      "type": "stdio",
+      "command": "bash",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/mcp/opendesign-mcp.sh"
+      ]
     }
   }
 }
