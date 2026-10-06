@@ -142,7 +142,7 @@ Game-Studios-Plugin/
 | Capability | Claude Code | ZCode | Codex |
 |---|---|---|---|
 | Skills | ✅ `game-studios:<skill>` | ✅ | ✅ native (same SKILL.md format) |
-| Agents (subagents) | ✅ `agents/*.md` | ✅ | ⚠️ not plugin-bundled — seeded as `.codex/agents/*.toml` by init |
+| Agents (subagents) | ✅ `agents/*.md` | ✅ | ✅ via `.codex/agents/*.toml` (seeded by init) |
 | Hooks | ✅ full set | ✅ supported subset | ✅ same `hooks/hooks.json` (review via `/hooks`; needs `bash` on PATH) |
 | Rules | ✅ native (`.claude/rules/`, verified auto-enforcement) | ✅ via `AGENTS.md` | ✅ via `AGENTS.md` |
 | Status line (init-seeded `statusline.sh`) | ✅ via `.claude/settings.json` | ❌ no project settings file | ❌ n/a |
